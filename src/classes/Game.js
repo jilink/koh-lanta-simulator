@@ -19,12 +19,10 @@ export default class Game {
     // let epreuveImmunite = new Epreuve(this.solo, "imunite")
 
     texts.push({text: "Vie sur le camps", color: "#bbff99"})
+    texts.push({text: `Denis:  Allons voir comment se porte la vie sur le camps pour nos candidats qui commencent leur semaine ${this.semaine}`, color: "gray"})
     texts = texts.concat(this.team1.events(this.semaine, Team.CAMP.NORMAL))
     texts = texts.concat(this.team2.events(this.semaine, Team.CAMP.NORMAL))
     console.log("textss", texts)
-
-    
-
     return texts;
   }
 }

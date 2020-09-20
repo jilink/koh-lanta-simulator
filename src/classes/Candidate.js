@@ -183,7 +183,8 @@ export default class Candidate {
     this.faim = 0; // pourcentage de faim
     this.fatigue = 0; // pourcentage de fatigue
     this.items = []
-    this.presentation();
+    this.friends = []
+    this.ennemies = []
   }
 
   presentation() {
@@ -205,13 +206,21 @@ export default class Candidate {
   }
 
   dialogue() {
-    return `${this.name} : je suis ${this.type.inteligence || 5}, ma fatigue est ${this.fatigue} , ma faim est de ${this.faim}`
+    return `${this.name} : je suis ${this.type.inteligence || 1}, ma fatigue est ${this.fatigue} , ma faim est de ${this.faim}`
   }
 
   action() {
     this.items.push("collier")
     console.log("itesme", this.items)
     return `${this.name} a trouvé un collier`
+  }
+
+  addFriend(candidate){
+    this.friends.push(candidate)
+  }
+
+  addEnnemy(candidate){
+    this.ennemes.push(candidate)
   }
 
 }

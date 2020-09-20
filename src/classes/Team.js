@@ -14,7 +14,6 @@ export default class Team {
     this.number = number;
     this.candidates = candidates || this.getRandomCandidates(number)
     this.items = []
-    this.presentation()
   }
 
   presentation(){
@@ -76,8 +75,10 @@ export default class Team {
 
   eliminate(index) {
     console.log(`Denis: ${this.candidates[index].name}, prenez votre flambeau, les aventuriers de la tribu ${this.name} on décidé de vous éliminer et leur sentence est irrévocable.`)
+    let eliminatedCandidate = this.candidates[index]
     this.candidates.splice(index, 1);
     this.number = this.candidates.length;
+    return eliminatedCandidate
   }
   
   injured(index, candidate) {
@@ -87,11 +88,37 @@ export default class Team {
   }
 
   events(semaine, camp){
-    if (camp == Team.CAMP.NORMAL)
+    let texts = []
+    if (camp === Team.CAMP.NORMAL && semaine === 1)
     {
-      return [{text: `tout est normal chez les ${this.name}`, color: "#4d4dff"}]
+      texts.push({text: `Denis: C'est le début de l'aventure et l'heure des présentations chez les ${this.name}`, color: "gray"})
+      texts = texts.concat(this.presentations())
     }
-  
+    return texts;
+  }
+
+  presentations(){
+    let tmpCandidates = this.candidates
+    let texts = []
+    while (tmpCandidates.length) {
+      if (tmpCandidates.length === 1) {
+        texts.push({text: `${tmpCandidates[0].name}: Ah bah tout le monde s'est présenté sauf moi ... coucou je suis ${tmpCandidates[0].name}`, color: "blue"})
+        texts.push({text: `Denis: Début d'aventure compliqué pour  ${tmpCandidates[0].name} qui se fait bolosser par son équipe`, color: "gray"})
+        tmpCandidates=[]
+      }
+      else {
+        let randomIndex = Math.floor(Math.random() * tmpCandidates.length)
+        let randomCandidate = tmpCandidates[randomIndex];
+        tmpCandidates.splice(randomIndex, 1);
+        randomIndex = Math.floor(Math.random() * tmpCandidates.length)
+        let randomCandidate2 = tmpCandidates[randomIndex];
+        tmpCandidates.splice(randomIndex, 1);
+        texts.push({text: `${randomCandidate.name}: Hey salut toi tu es ${randomCandidate2.name} c'est ça ? Tu as l'air ${randomCandidate2.type.typeName} et j'aime ça`, color: "blue"})
+        texts.push({text: `${randomCandidate2.name}: Coucou ${randomCandidate.name} tu veux être mon ami j'ai pas d'amis soit mon ami coucou tu m'entends`, color: "blue"})
+        randomCandidate.addFriend(randomCandidate2)
+      }
+    }
+    return texts;
   }
 
 }
