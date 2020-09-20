@@ -187,8 +187,7 @@ export default class Candidate {
   }
 
   presentation() {
-  console.log(`Bonjour je suis ${this.name}, de type ${this.type.typeName} et je suis de genre ${this.genre}`)
-  
+    console.log(`Bonjour je suis ${this.name}, de type ${this.type.typeName} et je suis de genre ${this.genre}`)
   }
 
   getType() {
@@ -214,8 +213,6 @@ export default class Candidate {
     console.log("itesme", this.items)
     return `${this.name} a trouvé un collier`
   }
-
-
 
 }
 

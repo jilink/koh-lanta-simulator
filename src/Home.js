@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Candidate from './classes/Candidate';
 import Team from './classes/Team';
+import Game from './classes/Game';
 
 // import { Container, Row, Col, Button } from 'react-bootstrap';
 
@@ -12,8 +13,7 @@ class Home extends React.Component {
     }
 
   componentDidMount(){
-      let T = new Team(undefined, 7)
-      T.eliminate(1)
+      new Game()
   }
 
     render() {

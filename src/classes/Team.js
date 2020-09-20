@@ -1,5 +1,13 @@
 import Candidate from './Candidate'
 export default class Team {
+
+  static CAMP = {
+    NORMAL: "normal",
+    VICTOIRE_CONFORT: "victoire confort",
+    ECHEC_CONFORT: "echec confort",
+    VICTOIRE_IMMUNITE: "victoire immunite",
+    ECHEC_IMUNITE: "echec immunite",
+  }
  
   constructor(name=undefined, number=5, candidates=undefined) {
     this.name = name || this.getRandomTeamName();
@@ -71,5 +79,20 @@ export default class Team {
     this.candidates.splice(index, 1);
     this.number = this.candidates.length;
   }
+  
+  injured(index, candidate) {
+    console.log(`Denis: Bonjour tribu ${this.name}, j'ai une mauvaise nouvelle à vous annoncer,  ${this.candidates[index].name}, doit abandonner pour raisons médicales c'est donc le ou la dernière éliminé qui prend sa place, c'est à dire ${candidate.name}.`)
+    this.candidates.splice(index, 1);
+    this.candidates.push(candidate)
+  }
+
+  events(semaine, camp){
+    if (camp == Team.CAMP.NORMAL)
+    {
+      return [{text: `tout est normal chez les ${this.name}`, color: "#4d4dff"}]
+    }
+  
+  }
+
 }
  
