@@ -1,4 +1,5 @@
 import Team from './Team'
+import Statics from './Statics'
 export default class Game {
   constructor(name="spéciale", team1=undefined, team2=undefined){
     this.name = name
@@ -18,11 +19,26 @@ export default class Game {
     // let epreuveConfort = new Epreuve(this.solo, "confort")
     // let epreuveImmunite = new Epreuve(this.solo, "imunite")
 
-    texts.push({text: "Vie sur le camps", color: "#bbff99"})
+    texts.push({text: "Vie sur le camps", color: "green"})
     texts.push({text: `Denis:  Allons voir comment se porte la vie sur le camps pour nos candidats qui commencent leur semaine ${this.semaine}`, color: "gray"})
     texts = texts.concat(this.team1.events(this.semaine, Team.CAMP.NORMAL))
     texts = texts.concat(this.team2.events(this.semaine, Team.CAMP.NORMAL))
-    console.log("textss", texts)
+    texts = texts.concat(this.epreuveEquipes("confort"))
+    // console.log("textss", texts)
+    for (let text of texts) {
+      console.log(`%c ${text.text}`, `color: ${text.color}`);
+    }
     return texts;
+  }
+
+  epreuveEquipes(type){
+    let texts = []
+    let epreuve = Statics.randomEpreuve()
+
+    if (type === "confort")
+    texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray"})
+
+    return texts
+  
   }
 }

@@ -16,7 +16,7 @@ export default class Candidate {
     GENTIL: {
       typeName: "gentil",
       chance: 0.8,
-      inteligence: 0.6,
+      intelligence: 0.6,
     },
     MECHANT: {
       typeName: "mechant",
@@ -31,7 +31,7 @@ export default class Candidate {
       force: 0.9,
       vitesse: 1.2,
       natation: 1.1,
-      inteligence: 0.5,
+      intelligence: 0.5,
     },
     PARFAIT: {
       typeName: "parfait",
@@ -41,7 +41,7 @@ export default class Candidate {
       vitesse: 1.5,
       natation: 1.5,
       survie: 1.5,
-      inteligence: 1.5,
+      intelligence: 1.5,
     },
     FUN: {
       typeName: "fun",
@@ -67,7 +67,7 @@ export default class Candidate {
       vitesse: 0.7,
       natation: 0.7,
       survie: 0.8,
-      inteligence: 2,
+      intelligence: 2,
     },
     DOYEN: {
       typeName: "doyen",
@@ -77,7 +77,7 @@ export default class Candidate {
       force: 0.7,
       vitesse: 0.7,
       survie: 1.3,
-      inteligence: 1.2,
+      intelligence: 1.2,
     },
     FLEMMARD: {
       typeName: "flemmard",
@@ -112,7 +112,7 @@ export default class Candidate {
       vitesse: 1.2,
       natation: 1.3,
       survie: 0.8,
-      inteligence: 0.8,
+      intelligence: 0.8,
     },
     GOURMAND: {
       typeName: "gourmand",
@@ -130,7 +130,7 @@ export default class Candidate {
       vitesse: 1.6,
       natation: 1.2,
       survie: 0.7,
-      inteligence: 0.6,
+      intelligence: 0.6,
     },
     DEPRESSIF: {
       typeName: "dépressif",
@@ -139,7 +139,7 @@ export default class Candidate {
       force: 0.6,
       vitesse: 0.6,
       survie: 0.8,
-      inteligence: 1.2,
+      intelligence: 1.2,
     },
     PLAINTIF: {
       typeName: "plaintif",
@@ -150,7 +150,7 @@ export default class Candidate {
       vitesse: 1,
       natation: 1,
       survie: 1,
-      inteligence: 1,
+      intelligence: 1,
     },
     PEUREUX: {
       typeName: "peureux",
@@ -161,7 +161,7 @@ export default class Candidate {
       vitesse: 1,
       natation: 1,
       survie: 1,
-      inteligence: 1,
+      intelligence: 1,
     },
     DEBROUILLARD: {
       typeName: "débrouillard",
@@ -172,7 +172,7 @@ export default class Candidate {
       vitesse: 1,
       natation: 1,
       survie: 1,
-      inteligence: 1,
+      intelligence: 1,
     },
   };
 
@@ -206,7 +206,7 @@ export default class Candidate {
   }
 
   dialogue() {
-    return `${this.name} : je suis ${this.type.inteligence || 1}, ma fatigue est ${this.fatigue} , ma faim est de ${this.faim}`
+    return `${this.name} : je suis ${this.type.intelligence || 1}, ma fatigue est ${this.fatigue} , ma faim est de ${this.faim}`
   }
 
   action() {

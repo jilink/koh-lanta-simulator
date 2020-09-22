@@ -1,4 +1,5 @@
 import Candidate from './Candidate'
+import Statics from './Statics'
 export default class Team {
 
   static CAMP = {
@@ -103,7 +104,7 @@ export default class Team {
     while (tmpCandidates.length) {
       if (tmpCandidates.length === 1) {
         texts.push({text: `${tmpCandidates[0].name}: Ah bah tout le monde s'est présenté sauf moi ... coucou je suis ${tmpCandidates[0].name}`, color: "blue"})
-        texts.push({text: `Denis: Début d'aventure compliqué pour  ${tmpCandidates[0].name} qui se fait bolosser par son équipe`, color: "gray"})
+        texts.push({text: `Denis: Début d'aventure compliqué pour ${tmpCandidates[0].name} qui se fait bolosser par son équipe`, color: "gray"})
         tmpCandidates=[]
       }
       else {
@@ -113,8 +114,10 @@ export default class Team {
         randomIndex = Math.floor(Math.random() * tmpCandidates.length)
         let randomCandidate2 = tmpCandidates[randomIndex];
         tmpCandidates.splice(randomIndex, 1);
-        texts.push({text: `${randomCandidate.name}: Hey salut toi tu es ${randomCandidate2.name} c'est ça ? Tu as l'air ${randomCandidate2.type.typeName} et j'aime ça`, color: "blue"})
-        texts.push({text: `${randomCandidate2.name}: Coucou ${randomCandidate.name} tu veux être mon ami j'ai pas d'amis soit mon ami coucou tu m'entends`, color: "blue"})
+        texts.push({text: Statics.replaceDialogue(randomCandidate, randomCandidate2, Statics.randomArray(Statics.PRESENTATION1)), color: "blue"})
+        texts.push({text: Statics.replaceDialogue(randomCandidate, randomCandidate2, Statics.randomArray(Statics.PRESENTATION2)), color: "blue"})
+        // texts.push({text: `${randomCandidate.name}: Hey salut toi tu es ${randomCandidate2.name} c'est ça ? Tu as l'air ${randomCandidate2.type.typeName} et j'aime ça`, color: "blue"})
+        // texts.push({text: `${randomCandidate2.name}: Coucou ${randomCandidate.name} tu veux être mon ami j'ai pas d'amis soit mon ami coucou tu m'entends`, color: "blue"})
         randomCandidate.addFriend(randomCandidate2)
       }
     }
