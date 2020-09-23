@@ -25,7 +25,7 @@ export default class Game {
     texts = texts.concat(this.team1.events(this.semaine, Team.CAMP.NORMAL))
     texts = texts.concat(this.team2.events(this.semaine, Team.CAMP.NORMAL))
     if (!this.solo) {
-    texts = texts.concat(this.epreuveEquipes("confort"))
+      texts = texts.concat(this.epreuveEquipes("confort"))
     }
     // console.log("textss", texts)
     for (let text of texts) {
@@ -43,9 +43,28 @@ export default class Game {
     }
     texts.push({text:"-------------------", color: "black"})
     texts.push({text:"-------------------", color: "black"})
-    this.team1.getTotalOfCompetence(epreuve.type)
+    let winnerTeam = this.winnerEquipes(this.team1, this.team2, epreuve)
+    texts.push({text: `Denis: AH ! L'équipe des ${winnerTeam.name} remporte l'épreuve ${epreuve.name} !`, color: "gray"})
+    texts = texts.concat(winnerTeam.congrats(epreuve.type))
+    if (this.team1 !== winnerTeam) {
+      texts = texts.concat(this.team1.shame(epreuve.type))
+    }
+    else {
+      texts = texts.concat(this.team2.shame(epreuve.type))
+    }
+    // this.team1.getTotalOfCompetence(epreuve.type)
+    // this.team1.getWeakestFromCompetence(epreuve.type)
+    // this.team1.getStrongestFromCompetence(epreuve.type)
 
     return texts
   
+  }
+
+  winnerEquipes(team1, team2, epreuve) {
+    console.log("prez", team1, team2, epreuve.type)
+    if (this.team1.getTotalOfCompetence(epreuve.type) > this.team2.getTotalOfCompetence(epreuve.type)){
+      return team1;
+    }
+    return team2;
   }
 }

@@ -11,7 +11,7 @@ export default class Statics {
     },
     RADEAUX: {
       name: "radeaux",
-      type: "inteligence"
+      type: "intelligence"
     },
     POUTRE: {
       name: "les poutres",
@@ -63,6 +63,55 @@ export default class Statics {
     ],
   }
 
+  static TEAM_CONGRATS = {
+    "H": [
+      "NAME1: Ok je vais dire un truc que tout le monde pense on aurait jamais réussi sans NAME2 qui est si TYPE2, c'est ce qu'il fallait pour une épreuve COMPETENCE", 
+      "NAME1: OMG qui aurait cru que ce TYPE2 de NAME2 nous aurait fait gagner une épreuve COMPETENCE, bravo", 
+      "NAME1: J'ai toujours su que t'étais un bon NAME2 depuis le premier jour ou je t'ai rencontré j'ai vu ce côté TYPE2", 
+      "NAME1: Ecoute NAME2 je suis un gars réglo, t'as tout fait tout seul t'es fort pour ce qui est COMPETENCE, car tu es TYPE2", 
+    ],
+    "F": [
+      "NAME1: Ok je vais dire un truc que tout le monde pense on aurait jamais réussi sans NAME2 qui est si TYPE2, c'est ce qu'il fallait pour une épreuve COMPETENCE", 
+      "NAME1: OMG qui aurait cru que ce TYPE2 de NAME2 nous aurait fait gagner une épreuve COMPETENCE, bravo", 
+      "NAME1: J'ai toujours su que t'étais un bon NAME2 depuis le premier jour ou je t'ai rencontré j'ai vu ce côté TYPE2", 
+      "NAME1: Je suis une meuf sincère et ce que tu as fait ici NAME2 c'était génial, tu gère en COMPETENCE tu es tellement TYPE2",
+    ],
+  }
+
+  static TEAM_CONGRATS_SOLO = {
+    "H": [
+      "NAME: Oui je sais je suis un gars TYPE, je suis chaud en COMPETENCE, je vous ai tous sauvé",
+      "NAME: BOUM eeeet ouais sans moi on aurait perdu je suis un dieu pour les épreuves COMPETENCE",
+    ],
+    "F": [
+      "NAME: En plus d'être une femme TYPE je peux dire que je suis forte en COMPETENCE maintenant",
+      "NAME: Je suis grave cool je nous ai fait gagner car je suis TYPE donc forte en COMPETENCE",
+    ],
+  }
+
+  static TEAM_SHAME = {
+    "H": [
+      "NAME1: MAIS OMG NAME2 t'as tout gaché on était bien partit mais toi qui est TYPE2 t'es trop nul en COMPETENCE",
+      "NAME1: t'inquiète c'est pas parce que t'es TYPE2 qu'on a perdu NAME2 ... Attends si en fait c'est ta faute",
+    ],
+    "F": [
+      "NAME1: MAIS OMG NAME2 t'as tout gaché on était bien partit mais toi qui est TYPE2 t'es trop nul en COMPETENCE",
+      "NAME1: t'inquiète c'est pas parce que t'es TYPE2 qu'on a perdu NAME2 ... Attends si en fait c'est ta faute",
+    ],
+  }
+
+  static TEAM_SHAME_SOLO = {
+    "H": [
+      "NAME: Vous m'en voulez pas qu'on a perdu car je suis trop TYPE pas vrai ...?",
+      "NAME: COMPETENCE c'est pas mon fort je vous l'avais dit ... Ah non je vous l'avez pas dit ? Ah bah je vous le dis ...",
+    ],
+    "F": [
+      "NAME: Vous m'en voulez pas qu'on a perdu car je suis trop TYPE pas vrai ...?",
+      "NAME: COMPETENCE c'est pas mon fort je vous l'avais dit ... Ah non je vous l'avez pas dit ? Ah bah je vous le dis ...",
+    ],
+  
+  }
+
   static randomEpreuve(){
     let keys = Object.keys(Statics.EPREUVE);
     return Statics.EPREUVE[keys[ keys.length * Math.random() << 0]];
@@ -76,17 +125,23 @@ export default class Statics {
     return 0;
   }
 
-  static replaceDialogue(candidate1, candidate2, text){
+  static replaceDialogue(candidate1, candidate2, text, competence=undefined){
     text = text.replace(/NAME1/g, candidate1.name)
     text = text.replace(/NAME2/g, candidate2.name)
     text = text.replace(/TYPE1/g, candidate1.type.typeName)
     text = text.replace(/TYPE2/g, candidate2.type.typeName)
+    if (competence){
+      text = text.replace(/COMPETENCE/g, competence)
+    }
     return text;
   }
 
-  static replaceDialogueSolo(candidate, text){
+  static replaceDialogueSolo(candidate, text, competence=undefined){
     text = text.replace(/NAME/g, candidate.name)
     text = text.replace(/TYPE/g, candidate.type.typeName)
+    if (competence){
+      text = text.replace(/COMPETENCE/g, competence)
+    }
     return text;
   }
 }

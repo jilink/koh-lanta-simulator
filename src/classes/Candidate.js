@@ -220,5 +220,9 @@ export default class Candidate {
     this.ennemes.push(candidate)
   }
 
+  getCompetence(competence){
+    return this.type[competence] || 1
+  }
+
 }
 

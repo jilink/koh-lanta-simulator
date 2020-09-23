@@ -114,13 +114,17 @@ export default class Team {
         let randomIndex = Math.floor(Math.random() * tmpCandidates.length)
         let randomCandidate = tmpCandidates[randomIndex];
         tmpCandidates.splice(randomIndex, 1);
+
         randomIndex = Math.floor(Math.random() * tmpCandidates.length)
         let randomCandidate2 = tmpCandidates[randomIndex];
         tmpCandidates.splice(randomIndex, 1);
+
         texts.push({text: Statics.replaceDialogue(randomCandidate, randomCandidate2, Statics.randomArray(Statics.PRESENTATION1[randomCandidate.genre])), color: this.color})
         texts.push({text: Statics.replaceDialogue(randomCandidate, randomCandidate2, Statics.randomArray(Statics.PRESENTATION2[randomCandidate.genre])), color: this.color})
+
         randomCandidate.addFriend(randomCandidate2)
         randomCandidate2.addFriend(randomCandidate)
+
         texts.push({text:"-------------------", color: "black"})
       }
     }
@@ -129,14 +133,60 @@ export default class Team {
   }
 
   getTotalOfCompetence(competence){
-    console.log("compentence", competence, this.candidates)
     let total = 0
     for (let candidate of this.candidates){
-      console.log(candidate.type.typeName, candidate.type[competence] || 1)
-      total += candidate.type[competence] || 1
+      console.log(candidate.name, candidate.getCompetence(competence))
+      total += candidate.getCompetence(competence)
     }
     console.log("total", total)
-  
+  }
+
+  getWeakestFromCompetence(competence){
+    let weakest = this.candidates[0]
+    for (let candidate of this.candidates) {
+      if (candidate.getCompetence(competence) < weakest.getCompetence(competence)) {
+        weakest = candidate
+      }
+    }
+    return weakest
+  }
+
+  getStrongestFromCompetence(competence){
+    let strongest = this.candidates[0]
+    for (let candidate of this.candidates) {
+      if (candidate.getCompetence(competence) > strongest.getCompetence(competence)) {
+        strongest = candidate
+      }
+    }
+    return strongest
+  }
+
+  congrats(competence) {
+    let candidate = Statics.randomArray(this.candidates)
+    let congratulatedCandidate = this.getStrongestFromCompetence(competence)
+    let texts = []
+    if (congratulatedCandidate === candidate){
+        texts.push({text: Statics.replaceDialogueSolo(candidate, Statics.randomArray(Statics.TEAM_CONGRATS_SOLO[candidate.genre]), competence), color: this.color})
+    }
+    else {
+        texts.push({text: Statics.replaceDialogue(candidate, congratulatedCandidate, Statics.randomArray(Statics.TEAM_CONGRATS[candidate.genre]), competence), color: this.color})
+    }
+
+    return texts
+  }
+
+  shame(competence) {
+    let candidate = Statics.randomArray(this.candidates)
+    let shamedCandidate = this.getWeakestFromCompetence(competence)
+    let texts = []
+    if (shamedCandidate === candidate){
+        texts.push({text: Statics.replaceDialogueSolo(candidate, Statics.randomArray(Statics.TEAM_SHAME_SOLO[candidate.genre]), competence), color: this.color})
+    }
+    else {
+        texts.push({text: Statics.replaceDialogue(candidate, shamedCandidate, Statics.randomArray(Statics.TEAM_SHAME[candidate.genre]), competence), color: this.color})
+    }
+
+    return texts
   }
 
 }
