@@ -3,19 +3,23 @@ export default class Statics {
   static EPREUVE = {
     PARCOURS_COMBATANT: {
       name: "parcours du combattant",
-      type: "vitesse"
+      type: "vitesse",
+      fatigue: 10,
     },
     INSECTES: {
       name: "degustation d'insectes",
-      type: "survie"
+      type: "survie",
+      fatigue: 2,
     },
     RADEAUX: {
       name: "radeaux",
-      type: "intelligence"
+      type: "intelligence",
+      fatigue: 7,
     },
     POUTRE: {
       name: "les poutres",
-      type: "chance"
+      type: "chance",
+      fatigue: 5,
     },
   }
 
@@ -110,6 +114,25 @@ export default class Statics {
       "NAME: COMPETENCE c'est pas mon fort je vous l'avais dit ... Ah non je vous l'avez pas dit ? Ah bah je vous le dis ...",
     ],
   
+  }
+
+  static EVENT = {
+    INJURED: "blessé",
+    FOUND_WATER: "trouvé l'eau",
+    FOUND_ALCOHOL: "trouvé l'alcohol",
+    MADE_FIRE: "fait le feu",
+    STOP_FIRE: "éteint le feu",
+    COLLIER: "a trouvé un collier",
+    DISPUTE: "dispute",
+    AMITIE: "amitié",
+    DROLE: "drole",
+    MANIOK: "a trouvé le manioc",
+    PECHE: "est partit pêcher",
+    PLUIE: "grosse pluie",
+    CABANE: "construction de la cabane",
+    CABANE_DESTRUCTED: "destruction de la cabane",
+    COMPLOT: "complot",
+    TRISTE: "triste",
   }
 
   static randomEpreuve(){

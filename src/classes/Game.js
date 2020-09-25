@@ -27,7 +27,6 @@ export default class Game {
     if (!this.solo) {
       texts = texts.concat(this.epreuveEquipes("confort"))
     }
-    // console.log("textss", texts)
     for (let text of texts) {
       console.log(`%c ${text.text}`, `color: ${text.color}`);
     }
@@ -44,24 +43,32 @@ export default class Game {
     texts.push({text:"-------------------", color: "black"})
     texts.push({text:"-------------------", color: "black"})
     let winnerTeam = this.winnerEquipes(this.team1, this.team2, epreuve)
+    let loserTeam; 
     texts.push({text: `Denis: AH ! L'équipe des ${winnerTeam.name} remporte l'épreuve ${epreuve.name} !`, color: "gray"})
     texts = texts.concat(winnerTeam.congrats(epreuve.type))
+    this.team1.updateFatigues(epreuve.fatigue)
+    this.team2.updateFatigues(epreuve.fatigue)
     if (this.team1 !== winnerTeam) {
       texts = texts.concat(this.team1.shame(epreuve.type))
+      loserTeam = this.team1
     }
     else {
       texts = texts.concat(this.team2.shame(epreuve.type))
+      loserTeam = this.team2
     }
-    // this.team1.getTotalOfCompetence(epreuve.type)
-    // this.team1.getWeakestFromCompetence(epreuve.type)
-    // this.team1.getStrongestFromCompetence(epreuve.type)
+    if (type === "confort"){
+      loserTeam.updateFaims(5)
+      texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir profiter de la récompense pendant que les autres auront grave le seum`, color: "gray"})
+      texts.push({text:"-------------------", color: "black"})
+      texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_CONFORT))
+      texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_CONFORT))
+    }
 
     return texts
   
   }
 
   winnerEquipes(team1, team2, epreuve) {
-    console.log("prez", team1, team2, epreuve.type)
     if (this.team1.getTotalOfCompetence(epreuve.type) > this.team2.getTotalOfCompetence(epreuve.type)){
       return team1;
     }

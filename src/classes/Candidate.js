@@ -192,12 +192,12 @@ export default class Candidate {
     return this.type;
   }
 
-  fatigueAugmente(unite) {
+  updateFatigue(unite) {
     let vitesseFatigue = this.type.vitesseFatigue || 1
     this.fatigue += unite * vitesseFatigue
   }
 
-  faimAugmente(unite) {
+  updateFaim(unite) {
     let vitesseFaim = this.type.vitesseFaim || 1
     this.faim += unite * vitesseFaim
   }
@@ -208,7 +208,6 @@ export default class Candidate {
 
   action() {
     this.items.push("collier")
-    console.log("itesme", this.items)
     return `${this.name} a trouvé un collier`
   }
 
@@ -217,7 +216,7 @@ export default class Candidate {
   }
 
   addEnnemy(candidate){
-    this.ennemes.push(candidate)
+    this.ennemies.push(candidate)
   }
 
   getCompetence(competence){

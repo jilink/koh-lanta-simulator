@@ -16,6 +16,10 @@ export default class Team {
     this.candidates = candidates || this.getRandomCandidates(number)
     this.color=color
     this.items = []
+    this.singleTimeEvents = [Statics.EVENT.FOUND_WATER, Statics.EVENT.FOUND_ALCOHOL, Statics.EVENT.MANIOK, Statics.EVENT.CABANE]
+    this.rareSingleTimeEvents = [Statics.EVENT.MADE_FIRE, Statics.EVENT.COLLIER, Statics.EVENT.COLLIER]
+    this.multipleTimesEvents = [Statics.EVENT.DISPUTE, Statics.EVENT.AMITIE, Statics.EVENT.DROLE,Statics.EVENT.COMPLOT, Statics.EVENT.TRISTE]
+    this.rareMultipleTimesEvents = [Statics.EVENT.PLUIE] // reflechir pour INJURED
   }
 
   presentation(){
@@ -77,7 +81,6 @@ export default class Team {
   }
 
   eliminate(index) {
-    console.log(`Denis: ${this.candidates[index].name}, prenez votre flambeau, les aventuriers de la tribu ${this.name} on décidé de vous éliminer et leur sentence est irrévocable.`)
     let eliminatedCandidate = this.candidates[index]
     this.candidates.splice(index, 1);
     this.number = this.candidates.length;
@@ -97,8 +100,115 @@ export default class Team {
       texts.push({text: `Denis: C'est le début de l'aventure et l'heure des présentations chez les ${this.name}`, color: "gray"})
       texts.push({text:"-------------------", color: "black"})
       texts = texts.concat(this.presentations())
+      return texts;
     }
+    if (camp === Team.CAMP.VICTOIRE_CONFORT) {
+      texts.push({text: `Denis: Ambiance de ouf chez la tribu ${this.name} qui profite de sa récompense en équipe bien méritée`, color: "gray"})
+    }
+    if (camp === Team.CAMP.ECHEC_CONFORT) {
+      texts.push({text: `Denis: Ambiance de merde par contre chez la tribu ${this.name} qui profite de bah rien ... mais en équipe aussi`, color: "gray"})
+    }
+    texts = texts.concat(this.randomCampEvent())
+    texts.push({text:"-------------------", color: "black"})
     return texts;
+  }
+  
+  randomCampEvent() {
+    let texts = []
+    let random = Math.random();
+    let event
+    if (random < 0.4) {
+      let index = Math.floor(Math.random() * this.multipleTimesEvents.length)
+      event = this.multipleTimesEvents[index]
+    }
+    else if (random < 0.7) {
+      let index = Math.floor(Math.random() * this.singleTimeEvents.length)
+      event = this.singleTimeEvents[index]
+      this.singleTimeEvents.splice(index, 1);
+    }
+    else if (random < 0.9) {
+      let index = Math.floor(Math.random() * this.rareMultipleTimesEvents.length)
+      event = this.rareMultipleTimesEvents[index]
+    }
+    else {
+      let index = Math.floor(Math.random() * this.rareSingleTimeEvents.length)
+      event = this.rareSingleTimeEvents[index]
+      this.rareSingleTimeEvents.splice(index, 1);
+    }
+
+    texts = texts.concat(this.happening(event))
+    console.log("COUCOUUUU", texts)
+    return texts
+  }
+
+  happening(event) {
+    let texts = []
+    const EVENT = Statics.EVENT
+    let candidate = Statics.randomArray(this.candidates)
+    switch (event) {
+      case EVENT.INJURED:
+        break;
+      case EVENT.FOUND_WATER:
+        texts.push({text: `${candidate.name}: J'ai trouvé l'eau !!!!!!`, color: this.color})
+        texts.push({text: `Denis: AH ! ${candidate.name} a trouvé l'eau chez les ${this.name} voilà qui va leur faire du bien !`, color: "gray"})
+        break;
+      case EVENT.FOUND_ALCOHOL:
+        texts.push({text: `${candidate.name}: J'ai trouvé l'eau !!!!!! Enfin j'ai trouvé des bières mais l'alcohol c'est de l'eau pas vrai !`, color: this.color})
+        if (!this.singleTimeEvents.includes(EVENT.FOUND_WATER)) {
+          texts.push({text: `Denis: AH ! Visiblement ${candidate.name} est amnésique en plus d'être alcoolique car l'eau avait déjà été trouvé ...`, color: "gray"})
+          texts.push({text: `${candidate.name}: Je vais enfin pouvoir arrêter de boire mon urine !`, color: this.color})
+          texts.push({text: `Denis: ... ah  ...`, color: "gray"})
+        }
+        break;
+      case EVENT.MADE_FIRE:
+        texts.push({text: `${candidate.name}: J'ai fait le feu !!! Je savais que ça servirait d'être ${candidate.type.typeName}`, color: this.color})
+        texts.push({text: `Denis: ${candidate.name} a réussi a faire le feu, prouesse remarquable chez les ${this.name} voilà qui va réchauffer leur coeurs !`, color: "gray"})
+        this.rareSingleTimeEvents.push(EVENT.STOP_FIRE)
+        break;
+      case EVENT.STOP_FIRE:
+        texts.push({text: `${candidate.name}: POUR JOSEEEEEEEEPPHHHHHHHHHHHHHHHH !!!!!!!!`, color: this.color})
+        texts.push({text: `Denis: Impossible ! ${candidate.name} vient tout juste d'éteindre le précieux feu dans la tribu ${this.name} du presque jamais vu dans Koh-Lantah !`, color: "gray"})
+        break;
+      case EVENT.COLLIER:
+        texts.push({text: `${candidate.name}: shhhhhhshhshhshshhhh ... je viens de trouver un collier d'immunité ...!!  Ok je vais devoir le cacher avant de rentrer au camps`, color: this.color})
+        texts.push({text: `Denis: Grâce aux zooms de notre caméraman sur l'arbre ou il était caché, ${candidate.name}, qu'on qualifie souvent de ${candidate.type.typeName} a trouvé un collier !`, color: "gray"})
+        break;
+      case EVENT.DISPUTE:
+        texts.push({text: `${candidate.name}: je suis venerrr`, color: this.color})
+        break;
+      case EVENT.AMITIE:
+        texts.push({text: `${candidate.name}: je suis content`, color: this.color})
+        break;
+      case EVENT.DROLE:
+        texts.push({text: `${candidate.name}: je suis drole`, color: this.color})
+        break;
+      case EVENT.MANIOK:
+        texts.push({text: `${candidate.name}: j'ai trouvé le maniok mes amis, grâce à Jésus nous n'auront plus jamais faim !`, color: this.color})
+        break;
+      case EVENT.PECHE:
+        texts.push({text: `${candidate.name}: j'ai un poisson !`, color: this.color})
+        break;
+      case EVENT.PLUIE:
+        texts.push({text: `${candidate.name}: oh non ohlalala la pluie !`, color: this.color})
+        break;
+      case EVENT.CABANE:
+        texts.push({text: `${candidate.name}: et voilà j'ai fait la cabane yes !`, color: this.color})
+        this.rareSingleTimeEvents.push(EVENT.CABANE_DESTRUCTED)
+        break;
+      case EVENT.CABANE_DESTRUCTED:
+        texts.push({text: `${candidate.name}: et voilà j'ai détruit la cabane yes !`, color: this.color})
+        break;
+      case EVENT.COMPLOT:
+        texts.push({text: `${candidate.name}: go faire des alliances !`, color: this.color})
+        break;
+      case EVENT.TRISTE:
+        texts.push({text: `${candidate.name}: jsuis triste !`, color: this.color})
+        break;
+      default:
+        break;
+    }
+  
+    return texts
   }
 
   presentations(){
@@ -135,10 +245,8 @@ export default class Team {
   getTotalOfCompetence(competence){
     let total = 0
     for (let candidate of this.candidates){
-      console.log(candidate.name, candidate.getCompetence(competence))
       total += candidate.getCompetence(competence)
     }
-    console.log("total", total)
   }
 
   getWeakestFromCompetence(competence){
@@ -170,6 +278,7 @@ export default class Team {
     }
     else {
         texts.push({text: Statics.replaceDialogue(candidate, congratulatedCandidate, Statics.randomArray(Statics.TEAM_CONGRATS[candidate.genre]), competence), color: this.color})
+        candidate.addFriend(congratulatedCandidate)
     }
 
     return texts
@@ -184,9 +293,22 @@ export default class Team {
     }
     else {
         texts.push({text: Statics.replaceDialogue(candidate, shamedCandidate, Statics.randomArray(Statics.TEAM_SHAME[candidate.genre]), competence), color: this.color})
+        candidate.addEnnemy(shamedCandidate)
     }
 
     return texts
+  }
+
+  updateFatigues(unite) {
+    for (let candidate of this.candidates) {
+      candidate.updateFatigue(unite)
+    }
+  }
+
+  updateFaims(unite) {
+    for (let candidate of this.candidates) {
+      candidate.updateFaim(unite)
+    }
   }
 
 }
