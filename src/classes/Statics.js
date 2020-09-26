@@ -21,6 +21,16 @@ export default class Statics {
       type: "chance",
       fatigue: 5,
     },
+    CORDE: {
+      name: "la corde",
+      type: "force",
+      fatigue: 7,
+    },
+    RELAIS_NATATION: {
+      name: "relais en mer",
+      type: "natation",
+      fatigue: 6,
+    },
   }
 
   static PRESENTATION1 = {
@@ -54,14 +64,14 @@ export default class Statics {
     "H" :[
       "NAME: On dirait que y a que moi qui me suis pas fait de pote ça se fait pas moi qui suis si TYPE",
       "NAME: Okok personne vient me parler à moi je retiens t'façon j'ai toujours su que c'était QU'UNE BANDE D...",
-      "NAME: Bizarre, dans la vie je suis pourtant très apprecié de mon cactus de compagnie et la personne ne vient me parler",
+      "NAME: Bizarre, dans la vie je suis pourtant très apprecié de mon cactus de compagnie et là personne ne vient me parler",
       "NAME: Je suis quelqu'un de simple, on dit aussi de moi que je suis TYPE, mais sans amis c'est la première fois de ma vie ...",
       "NAME: Je suis allé dire bonjour à tout le monde on m'a ignoré mais pas grave chacun fait sa vie y a pas de soucis, le jour ou je trouve l'eau je la garde pour moi, si je fais le feu il sera que pour moi et j'irais aux toilettes tout seul aussi pas de problèmes j'ai compris !!"
     ],
     "F" :[
       "NAME: On dirait que y a que moi qui me suis pas fait de pote ça se fait pas moi qui suis si TYPE",
       "NAME: Okok personne vient me parler à moi je retiens t'façon j'ai toujours su que c'était QU'UNE BANDE D...",
-      "NAME: Bizarre, dans la vie je suis pourtant très appreciée de mon cactus de compagnie et la personne ne vient me parler",
+      "NAME: Bizarre, dans la vie je suis pourtant très appreciée de mon cactus de compagnie et là personne ne vient me parler",
       "NAME: Je suis une fille simple, on dit aussi de moi que je suis TYPE, mais sans amis c'est la première fois de ma vie ...",
       "NAME: Je suis allée dire bonjour à tout le monde on m'a ignorée mais pas grave chacun fait sa vie y a pas de soucis, le jour ou je trouve l'eau je la garde pour moi, si je fais le feu il sera que pour moi et j'irais aux toilettes tout seul aussi pas de problèmes j'ai compris !!"
     ],

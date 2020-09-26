@@ -171,6 +171,12 @@ export default class Candidate {
       survie: 1.6,
       intelligence: 1.2,
     },
+    NAGEUR: {
+      typeName: "nageur",
+      force: 1.2,
+      vitesse: 1.2,
+      natation: 2.1,
+    },
   };
 
   constructor(name, type, genre) {
@@ -206,9 +212,8 @@ export default class Candidate {
     return `${this.name} : je suis ${this.type.intelligence || 1}, ma fatigue est ${this.fatigue} , ma faim est de ${this.faim}`
   }
 
-  action() {
-    this.items.push("collier")
-    return `${this.name} a trouvé un collier`
+  addItem(item) {
+    this.items.push(item)
   }
 
   addFriend(candidate){

@@ -103,11 +103,12 @@ export default class Team {
       return texts;
     }
     if (camp === Team.CAMP.VICTOIRE_CONFORT) {
-      texts.push({text: `Denis: Ambiance de ouf chez la tribu ${this.name} qui profite de sa récompense en équipe bien méritée`, color: "gray"})
+      texts.push({text: `Denis: De retour sur le camp après que la tribu ${this.name} ai pu profiter de sa récompense`, color: "gray"})
     }
     if (camp === Team.CAMP.ECHEC_CONFORT) {
-      texts.push({text: `Denis: Ambiance de merde par contre chez la tribu ${this.name} qui profite de bah rien ... mais en équipe aussi`, color: "gray"})
+      texts.push({text: `Denis: Allons maintenant voir du côté des ${this.name} qui reviennent perdant de la dernière épreuve de confort`, color: "gray"})
     }
+    texts = texts.concat(this.randomCampEvent())
     texts = texts.concat(this.randomCampEvent())
     texts.push({text:"-------------------", color: "black"})
     return texts;
@@ -168,10 +169,12 @@ export default class Team {
       case EVENT.STOP_FIRE:
         texts.push({text: `${candidate.name}: POUR JOSEEEEEEEEPPHHHHHHHHHHHHHHHH !!!!!!!!`, color: this.color})
         texts.push({text: `Denis: Impossible ! ${candidate.name} vient tout juste d'éteindre le précieux feu dans la tribu ${this.name} du presque jamais vu dans Koh-Lantah !`, color: "gray"})
+        this.rareSingleTimeEvents.push(EVENT.MADE_FIRE)
         break;
       case EVENT.COLLIER:
         texts.push({text: `${candidate.name}: shhhhhhshhshhshshhhh ... je viens de trouver un collier d'immunité ...!!  Ok je vais devoir le cacher avant de rentrer au camps`, color: this.color})
         texts.push({text: `Denis: Grâce aux zooms de notre caméraman sur l'arbre ou il était caché, ${candidate.name}, qu'on qualifie souvent de ${candidate.type.typeName} a trouvé un collier !`, color: "gray"})
+        candidate.addItem("collier")
         break;
       case EVENT.DISPUTE:
         texts.push({text: `${candidate.name}: je suis venerrr`, color: this.color})
@@ -184,6 +187,7 @@ export default class Team {
         break;
       case EVENT.MANIOK:
         texts.push({text: `${candidate.name}: j'ai trouvé le maniok mes amis, grâce à Jésus nous n'auront plus jamais faim !`, color: this.color})
+        this.updateFaims(-2)
         break;
       case EVENT.PECHE:
         texts.push({text: `${candidate.name}: j'ai un poisson !`, color: this.color})
@@ -197,6 +201,7 @@ export default class Team {
         break;
       case EVENT.CABANE_DESTRUCTED:
         texts.push({text: `${candidate.name}: et voilà j'ai détruit la cabane yes !`, color: this.color})
+        this.singleTimeEvents.push(EVENT.CABANE)
         break;
       case EVENT.COMPLOT:
         texts.push({text: `${candidate.name}: go faire des alliances !`, color: this.color})

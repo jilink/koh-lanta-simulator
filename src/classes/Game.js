@@ -27,6 +27,9 @@ export default class Game {
     if (!this.solo) {
       texts = texts.concat(this.epreuveEquipes("confort"))
     }
+    if (!this.solo) {
+      texts = texts.concat(this.epreuveEquipes("immunité"))
+    }
     for (let text of texts) {
       console.log(`%c ${text.text}`, `color: ${text.color}`);
     }
@@ -39,6 +42,9 @@ export default class Game {
 
     if (type === "confort"){
       texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray"})
+    }
+    if (type === "immunité"){
+      texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray"})
     }
     texts.push({text:"-------------------", color: "black"})
     texts.push({text:"-------------------", color: "black"})
