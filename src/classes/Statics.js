@@ -80,13 +80,13 @@ export default class Statics {
   static TEAM_CONGRATS = {
     "H": [
       "NAME1: Ok je vais dire un truc que tout le monde pense on aurait jamais réussi sans NAME2 qui est si TYPE2, c'est ce qu'il fallait pour une épreuve COMPETENCE", 
-      "NAME1: OMG qui aurait cru que ce TYPE2 de NAME2 nous aurait fait gagner une épreuve COMPETENCE, bravo", 
+      "NAME1: OMG qui aurait cru quelqu'un de TYPE2 comme NAME2 nous aurait fait gagner une épreuve COMPETENCE, bravo", 
       "NAME1: J'ai toujours su que t'étais un bon NAME2 depuis le premier jour ou je t'ai rencontré j'ai vu ce côté TYPE2", 
       "NAME1: Ecoute NAME2 je suis un gars réglo, t'as tout fait tout seul t'es fort pour ce qui est COMPETENCE, car tu es TYPE2", 
     ],
     "F": [
       "NAME1: Ok je vais dire un truc que tout le monde pense on aurait jamais réussi sans NAME2 qui est si TYPE2, c'est ce qu'il fallait pour une épreuve COMPETENCE", 
-      "NAME1: OMG qui aurait cru que ce TYPE2 de NAME2 nous aurait fait gagner une épreuve COMPETENCE, bravo", 
+      "NAME1: OMG qui aurait cru que quelqu'un de TYPE2 comme NAME2 nous aurait fait gagner une épreuve COMPETENCE, bravo", 
       "NAME1: J'ai toujours su que t'étais un bon NAME2 depuis le premier jour ou je t'ai rencontré j'ai vu ce côté TYPE2", 
       "NAME1: Je suis une meuf sincère et ce que tu as fait ici NAME2 c'était génial, tu gère en COMPETENCE tu es tellement TYPE2",
     ],
@@ -150,7 +150,12 @@ export default class Statics {
     return Statics.EPREUVE[keys[ keys.length * Math.random() << 0]];
   }
 
-  static randomArray(array){
+  static randomArray(array, exclude = undefined){
+    if (exclude && array.includes(exclude)) {
+      console.log(array.slice(), "beofre exclude")
+      array.splice(exclude, 1)
+      console.log(array.slice(), "after exclude", exclude)
+    }
     return array[Math.floor(Math.random() * array.length)];
   }
 
@@ -176,5 +181,15 @@ export default class Statics {
       text = text.replace(/COMPETENCE/g, competence)
     }
     return text;
+  }
+
+  static countOccurrences(array){
+    return array.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
+  }
+  
+  static diffArray(arr1, arr2) {
+    return arr1
+      .concat(arr2)
+      .filter(item => !arr1.includes(item) || !arr2.includes(item));
   }
 }

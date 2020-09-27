@@ -69,6 +69,13 @@ export default class Game {
       texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_CONFORT))
       texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_CONFORT))
     }
+    if (type === "immunité") {
+      texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir rentrer sur le camps serein je vous remets le totem`, color: "gray"})
+      texts.push({text:"-------------------", color: "black"})
+      texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_IMMUNITE))
+      texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
+    
+    }
 
     return texts
   

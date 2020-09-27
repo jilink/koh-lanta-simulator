@@ -1,3 +1,4 @@
+import Statics from './Statics'
 export default class Candidate {
   static TYPE = {
     NORMAL: {
@@ -226,6 +227,25 @@ export default class Candidate {
 
   getCompetence(competence){
     return this.type[competence] || 1
+  }
+
+  vote(candidates) {
+    // Vote for an ennemy, if no ennemies, don't vote for a friend, if everybody friend or no friend vote for somebody random that is not you
+    if (this.ennemies.length) {
+      console.log(this.name, this.ennemies, this.friends, this.ennemies.length, "me, ennemies")
+      console.log(Statics.randomArray(this.ennemies.slice(), this), "ici random ennemy")
+      return Statics.randomArray(this.ennemies.slice(), this)
+    }
+    if (this.friends.length) {
+      let notFriendsCandidates = Statics.diffArray(candidates, this.friends) 
+      console.log("my frirends", this.friends)
+      if (notFriendsCandidates.length) {
+        console.log(Statics.randomArray(notFriendsCandidates.slice(), this), "ici random not friends")
+        return Statics.randomArray(notFriendsCandidates.slice(), this)
+      }
+    }
+    console.log(Statics.randomArray(candidates.slice(), this), "ici random")
+    return Statics.randomArray(candidates.slice(), this)
   }
 
 }

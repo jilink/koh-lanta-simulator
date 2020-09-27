@@ -7,7 +7,7 @@ export default class Team {
     VICTOIRE_CONFORT: "victoire confort",
     ECHEC_CONFORT: "echec confort",
     VICTOIRE_IMMUNITE: "victoire immunite",
-    ECHEC_IMUNITE: "echec immunite",
+    ECHEC_IMMUNITE: "echec immunite",
   }
  
   constructor({name=undefined, number=5, candidates=undefined, color="blue"}) {
@@ -105,13 +105,59 @@ export default class Team {
     if (camp === Team.CAMP.VICTOIRE_CONFORT) {
       texts.push({text: `Denis: De retour sur le camp après que la tribu ${this.name} ai pu profiter de sa récompense`, color: "gray"})
     }
-    if (camp === Team.CAMP.ECHEC_CONFORT) {
+    else if (camp === Team.CAMP.ECHEC_CONFORT) {
       texts.push({text: `Denis: Allons maintenant voir du côté des ${this.name} qui reviennent perdant de la dernière épreuve de confort`, color: "gray"})
+    }
+    else if (camp === Team.CAMP.VICTOIRE_IMMUNITE) {
+      texts.push({text: `Denis: La tribu ${this.name} a gagné l'épreuve d'immunité, voyons ce qu'il se passe sur leur camps !`, color: "gray"})
+    }
+    else if (camp === Team.CAMP.ECHEC_IMMUNITE) {
+      texts.push({text: `Denis: Malheureusement les ${this.name} reviennent perdant de vont devoir affronter le conseil allons faire un tour sur leur camps !`, color: "gray"})
     }
     texts = texts.concat(this.randomCampEvent())
     texts = texts.concat(this.randomCampEvent())
     texts.push({text:"-------------------", color: "black"})
+    if (camp === Team.CAMP.ECHEC_IMMUNITE) {
+      texts.push({text: `Denis: C'est l'heure du conseil, les ${this.name} vont devoir décider de l'aventurier dont ils doivent se séparer !`, color: "gray"})
+      texts = texts.concat(this.conseil(false))
+    }
     return texts;
+  }
+
+  conseil(solo) {
+    let texts = []
+    let votesNames =[]
+    let votes =[]
+    for (let candidate of this.candidates)
+    {
+      let vote = candidate.vote(this.candidates.slice())
+      votes.push(vote)
+      votesNames.push(vote.name)
+    }
+    console.log(Statics.countOccurrences(votesNames), "ICII")
+    console.log(this.mostVoteCandidate(votes), "ICII leplus voté")
+    return texts
+  }
+
+  mostVoteCandidate(array) {
+    if(array.length == 0)
+      return null;
+    var modeMap = {};
+    var maxEl = array[0], maxCount = 1;
+    for(var i = 0; i < array.length; i++)
+    {
+      var el = array[i];
+      if(modeMap[el] == null)
+        modeMap[el] = 1;
+      else
+        modeMap[el]++;  
+      if(modeMap[el] > maxCount)
+      {
+        maxEl = el;
+        maxCount = modeMap[el];
+      }
+    }
+    return maxEl;
   }
   
   randomCampEvent() {
@@ -138,7 +184,6 @@ export default class Team {
     }
 
     texts = texts.concat(this.happening(event))
-    console.log("COUCOUUUU", texts)
     return texts
   }
 
