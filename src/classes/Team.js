@@ -130,12 +130,22 @@ export default class Team {
     let votes =[]
     for (let candidate of this.candidates)
     {
-      let vote = candidate.vote(this.candidates.slice())
-      votes.push(vote)
-      votesNames.push(vote.name)
+      let vote = candidate.vote(this.candidates.slice(), this.color)
+      if (vote.text){
+        texts.push(vote.text)
+      }
+      votes.push(vote.vote)
+      votesNames.push(vote.vote.name)
     }
-    console.log(Statics.countOccurrences(votesNames), "ICII")
-    console.log(this.mostVoteCandidate(votes), "ICII leplus voté")
+    let depouille = Statics.countOccurrences(votesNames)
+    for(let [key, val] of Object.entries(depouille)) {
+      texts.push({text: `Denis: ${val} votes contre vous ${key}`, color: "gray"})
+    }
+
+    let eliminatedCandidate = this.mostVoteCandidate(votes)
+    texts.push({text: `Denis: ${eliminatedCandidate.name} prenez votre flambeau, venez me rejoindre`, color: "gray"})
+    texts.push({text: `${eliminatedCandidate.name}: Peut être ai-je joué un jeu un peu trop ${eliminatedCandidate.type.typeName}`, color: this.color})
+    texts.push({text: `Denis: ${eliminatedCandidate.name} les aventuriers de la tribu ${this.name} ont décidé de vous éliminer, et leur sentence est irrévocable !!!`, color: "gray"})
     return texts
   }
 

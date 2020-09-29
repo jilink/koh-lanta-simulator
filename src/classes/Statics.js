@@ -152,9 +152,8 @@ export default class Statics {
 
   static randomArray(array, exclude = undefined){
     if (exclude && array.includes(exclude)) {
-      console.log(array.slice(), "beofre exclude")
-      array.splice(exclude, 1)
-      console.log(array.slice(), "after exclude", exclude)
+      let excludeIndex = array.indexOf(exclude)
+      array.splice(excludeIndex, 1)
     }
     return array[Math.floor(Math.random() * array.length)];
   }

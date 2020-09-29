@@ -229,23 +229,20 @@ export default class Candidate {
     return this.type[competence] || 1
   }
 
-  vote(candidates) {
+  vote(candidates, color="white") {
     // Vote for an ennemy, if no ennemies, don't vote for a friend, if everybody friend or no friend vote for somebody random that is not you
     if (this.ennemies.length) {
-      console.log(this.name, this.ennemies, this.friends, this.ennemies.length, "me, ennemies")
-      console.log(Statics.randomArray(this.ennemies.slice(), this), "ici random ennemy")
-      return Statics.randomArray(this.ennemies.slice(), this)
+      let votedCandidate = Statics.randomArray(this.ennemies.slice(), this)
+      return {vote: votedCandidate, text: {text: `${this.name}: Ce soir je vote contre toi ${votedCandidate.name} car tu es trop ${votedCandidate.type.typeName}`, color: color }}
     }
     if (this.friends.length) {
       let notFriendsCandidates = Statics.diffArray(candidates, this.friends) 
-      console.log("my frirends", this.friends)
       if (notFriendsCandidates.length) {
-        console.log(Statics.randomArray(notFriendsCandidates.slice(), this), "ici random not friends")
-        return Statics.randomArray(notFriendsCandidates.slice(), this)
+        let votedCandidate = Statics.randomArray(notFriendsCandidates.slice(), this)
+        return {vote: votedCandidate, text: {text: `${this.name}: Désolé mais ce soir je vote contre toi ${votedCandidate.name} c'est pas personel juste que j'ai moin d'afinité avec toi`, color: color }}
       }
     }
-    console.log(Statics.randomArray(candidates.slice(), this), "ici random")
-    return Statics.randomArray(candidates.slice(), this)
+    return {vote: Statics.randomArray(candidates.slice(), this), text: {text: `${this.name}: Pour qui je vote ? Suspense`, color: color}}
   }
 
 }
