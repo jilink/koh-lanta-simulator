@@ -12,7 +12,12 @@ export default class Team {
  
   constructor({name=undefined, number=5, candidates=undefined, color="blue"}) {
     this.name = name || this.getRandomTeamName();
-    this.number = number;
+    if (candidates && candidates.length > number) {
+      this.number =candidates.length
+    }
+    else {
+      this.number = number;
+    }
     this.candidates = candidates || this.getRandomCandidates(number)
     this.color=color
     this.items = []
@@ -158,14 +163,14 @@ export default class Team {
   }
 
   mostVoteCandidate(array) {
-    if(array.length == 0)
+    if(array.length === 0)
       return null;
     var modeMap = {};
     var maxEl = array[0], maxCount = 1;
     for(var i = 0; i < array.length; i++)
     {
       var el = array[i];
-      if(modeMap[el] == null)
+      if(modeMap[el] === null)
         modeMap[el] = 1;
       else
         modeMap[el]++;  

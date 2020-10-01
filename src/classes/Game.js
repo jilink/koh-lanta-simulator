@@ -6,9 +6,15 @@ export default class Game {
     this.name = name
     this.team1 = team1 || new Team({color: "#fa4e65"})
     this.team2 = team2 || new Team({color: "#d7c490"})
+    this.team3 = undefined
     this.semaine = 1
     this.solo = false
     this.eliminates = []
+    this.week()
+    this.week()
+    this.week()
+    this.week()
+    this.week()
     this.week()
     this.week()
     this.week()
@@ -26,18 +32,26 @@ export default class Game {
 
     texts.push({text: "Vie sur le camps", color: "green"})
     texts.push({text: `Denis:  Allons voir comment se porte la vie sur le camps pour nos candidats qui commencent leur semaine ${this.semaine}`, color: "gray"})
-    texts = texts.concat(this.team1.events(this.semaine, Team.CAMP.NORMAL))
-    texts = texts.concat(this.team2.events(this.semaine, Team.CAMP.NORMAL))
     if (!this.solo) {
+      texts = texts.concat(this.team1.events(this.semaine, Team.CAMP.NORMAL))
+      texts = texts.concat(this.team2.events(this.semaine, Team.CAMP.NORMAL))
       texts = texts.concat(this.epreuveEquipes("confort"))
-    }
-    if (!this.solo) {
       texts = texts.concat(this.epreuveEquipes("immunité"))
     }
+    else {
+      texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.NORMAL))
+      texts = texts.concat(this.epreuveSolo("confort"))
+      texts = texts.concat(this.epreuveSolo("immunité"))
+    }
+    this.semaine++
+    if (!this.solo && (this.team1.candidates.length + this.team2.candidates.length) < 8) {
+      this.solo = true;
+      texts.push({text: `Denis: AH ! L'heure de la réunification est venue ! Nos 1 tribues n'en formeront qu'une seule, la tribu blanche !`, color: "gray"})
+      let team3Candidates = this.team1.candidates.concat(this.team2.candidates)
+      this.team3 = new Team({name: "blanche", candidates: team3Candidates, color: "#000000"})    }
     for (let text of texts) {
       console.log(`%c ${text.text}`, `color: ${text.color}`);
     }
-    this.semaine++
     return texts;
   }
 
@@ -95,5 +109,34 @@ export default class Game {
       return team1;
     }
     return team2;
+  }
+
+  epreuveSolo(type){
+    let texts = []
+    let epreuve = Statics.randomEpreuve()
+
+    if (type === "confort"){
+      texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray"})
+    }
+    if (type === "immunité"){
+      texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray"})
+    }
+    texts.push({text:"-------------------", color: "black"})
+    texts.push({text:"-------------------", color: "black"})
+    let winner = this.team3.getStrongestFromCompetence(epreuve.type)
+    texts.push({text: `Denis: AH ! ${winner.name} remporte l'épreuve ${epreuve.name} !`, color: "gray"})
+
+    if (type === "confort"){
+      this.team3.updateFaims(5) // exclure le gagnant
+      texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.CAMP_NORMAL))
+    }
+    if (type === "immunité") {
+      texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
+      this.eliminates.push(this.team3.getLastEliminated())
+      console.log("le dernier eliminé est", this.eliminates.pop())
+    }
+
+    return texts
+  
   }
 }
