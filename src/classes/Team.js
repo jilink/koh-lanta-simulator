@@ -313,11 +313,13 @@ export default class Team {
     return texts;
   }
 
-  getTotalOfCompetence(competence){
+  getTotalOfCompetence(competence, nb_participants){
     let total = 0
     for (let candidate of this.candidates){
       total += candidate.getCompetence(competence)
     }
+    total = total / this.candidates.length * nb_participants
+    return total
   }
 
   getWeakestFromCompetence(competence){

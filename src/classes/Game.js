@@ -89,7 +89,9 @@ export default class Game {
   }
 
   winnerEquipes(team1, team2, epreuve) {
-    if (this.team1.getTotalOfCompetence(epreuve.type) > this.team2.getTotalOfCompetence(epreuve.type)){
+    // one day use boule noir to remove some members of the team
+    let nb_participants = Math.min(team1.candidates.length, team2.candidates.length)
+    if (team1.getTotalOfCompetence(epreuve.type, nb_participants) > team2.getTotalOfCompetence(epreuve.type, nb_participants)){
       return team1;
     }
     return team2;

@@ -233,14 +233,17 @@ export default class Candidate {
     // Vote for an ennemy, if no ennemies, don't vote for a friend, if everybody friend or no friend vote for somebody random that is not you
     if (this.ennemies.length) {
       let votedCandidate = Statics.randomArray(this.ennemies.slice(), this)
-      // BUG YOU CAN VOTE FOR AN ELIMINATED CANDIDATE
-      return {vote: votedCandidate, text: {text: `${this.name}: Ce soir je vote contre toi ${votedCandidate.name} car tu es trop ${votedCandidate.type.typeName}`, color: color }}
+      if (candidates.includes(votedCandidate)) { // test if the ennemy is still in the team
+        return {vote: votedCandidate, text: {text: `${this.name}: Ce soir je vote contre toi ${votedCandidate.name} car tu es trop ${votedCandidate.type.typeName}`, color: color }}
+      }
     }
     if (this.friends.length) {
       let notFriendsCandidates = Statics.diffArray(candidates, this.friends) 
       if (notFriendsCandidates.length) {
         let votedCandidate = Statics.randomArray(notFriendsCandidates.slice(), this)
-        return {vote: votedCandidate, text: {text: `${this.name}: Désolé mais ce soir je vote contre toi ${votedCandidate.name} c'est pas personel juste que j'ai moin d'afinité avec toi`, color: color }}
+        if (candidates.includes(votedCandidate)) { // test if the friend is still in the team
+          return {vote: votedCandidate, text: {text: `${this.name}: Désolé mais ce soir je vote contre toi ${votedCandidate.name} c'est pas personel juste que j'ai moin d'afinité avec toi`, color: color }}
+        }
       }
     }
     return {vote: Statics.randomArray(candidates.slice(), this), text: {text: `${this.name}: Pour qui je vote ? Suspense`, color: color}}
