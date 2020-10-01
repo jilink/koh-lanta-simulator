@@ -48,7 +48,7 @@ export default class Game {
       this.solo = true;
       texts.push({text: `Denis: AH ! L'heure de la réunification est venue ! Nos 1 tribues n'en formeront qu'une seule, la tribu blanche !`, color: "gray"})
       let team3Candidates = this.team1.candidates.concat(this.team2.candidates)
-      this.team3 = new Team({name: "blanche", candidates: team3Candidates, color: "#000000"})    }
+      this.team3 = new Team({name: "réunifiés", candidates: team3Candidates, color: "#000000"})    }
     for (let text of texts) {
       console.log(`%c ${text.text}`, `color: ${text.color}`);
     }

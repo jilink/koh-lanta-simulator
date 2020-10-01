@@ -120,7 +120,7 @@ export default class Team {
       texts.push({text: `Denis: La tribu ${this.name} a gagné l'épreuve d'immunité, voyons ce qu'il se passe sur leur camps !`, color: "gray"})
     }
     else if (camp === Team.CAMP.ECHEC_IMMUNITE) {
-      texts.push({text: `Denis: Malheureusement les ${this.name} reviennent perdant de vont devoir affronter le conseil allons faire un tour sur leur camps !`, color: "gray"})
+      texts.push({text: `Denis: Malheureusement les ${this.name} reviennent perdant et vont devoir affronter le conseil allons faire un tour sur leur camps !`, color: "gray"})
     }
     texts = texts.concat(this.randomCampEvent())
     texts = texts.concat(this.randomCampEvent())
@@ -150,6 +150,7 @@ export default class Team {
       texts.push({text: `Denis: ${val} votes contre vous ${key}`, color: "gray"})
     }
 
+    console.log("LES VOTEs", votes)
     let eliminatedCandidate = this.mostVoteCandidate(votes)
     texts.push({text: `Denis: ${eliminatedCandidate.name} prenez votre flambeau, venez me rejoindre`, color: "gray"})
     texts.push({text: `${eliminatedCandidate.name}: Peut être ai-je joué un jeu un peu trop ${eliminatedCandidate.type.typeName}`, color: this.color})
@@ -165,19 +166,18 @@ export default class Team {
   mostVoteCandidate(array) {
     if(array.length === 0)
       return null;
-    var modeMap = {};
-    var maxEl = array[0], maxCount = 1;
-    for(var i = 0; i < array.length; i++)
+    let modeMap = {};
+    let maxEl = array[0], maxCount = 1;
+    for(let el of array)
     {
-      var el = array[i];
-      if(modeMap[el] === null)
-        modeMap[el] = 1;
+      if(modeMap[el.name] === undefined)
+        modeMap[el.name] = 1;
       else
-        modeMap[el]++;  
-      if(modeMap[el] > maxCount)
+        modeMap[el.name]++;  
+      if(modeMap[el.name] > maxCount)
       {
         maxEl = el;
-        maxCount = modeMap[el];
+        maxCount = modeMap[el.name];
       }
     }
     return maxEl;
