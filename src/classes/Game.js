@@ -7,7 +7,11 @@ export default class Game {
     this.team1 = team1 || new Team({color: "#fa4e65"})
     this.team2 = team2 || new Team({color: "#d7c490"})
     this.semaine = 1
-    this.solo=false
+    this.solo = false
+    this.eliminates = []
+    this.week()
+    this.week()
+    this.week()
     this.week()
   }
 
@@ -33,6 +37,7 @@ export default class Game {
     for (let text of texts) {
       console.log(`%c ${text.text}`, `color: ${text.color}`);
     }
+    this.semaine++
     return texts;
   }
 
@@ -74,6 +79,8 @@ export default class Game {
       texts.push({text:"-------------------", color: "black"})
       texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_IMMUNITE))
       texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
+      this.eliminates.push(loserTeam.getLastEliminated())
+      console.log("le dernier eliminé est", this.eliminates.pop())
     
     }
 

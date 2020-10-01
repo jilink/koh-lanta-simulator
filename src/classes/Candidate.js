@@ -233,6 +233,7 @@ export default class Candidate {
     // Vote for an ennemy, if no ennemies, don't vote for a friend, if everybody friend or no friend vote for somebody random that is not you
     if (this.ennemies.length) {
       let votedCandidate = Statics.randomArray(this.ennemies.slice(), this)
+      // BUG YOU CAN VOTE FOR AN ELIMINATED CANDIDATE
       return {vote: votedCandidate, text: {text: `${this.name}: Ce soir je vote contre toi ${votedCandidate.name} car tu es trop ${votedCandidate.type.typeName}`, color: color }}
     }
     if (this.friends.length) {

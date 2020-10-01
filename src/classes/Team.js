@@ -20,6 +20,7 @@ export default class Team {
     this.rareSingleTimeEvents = [Statics.EVENT.MADE_FIRE, Statics.EVENT.COLLIER, Statics.EVENT.COLLIER]
     this.multipleTimesEvents = [Statics.EVENT.DISPUTE, Statics.EVENT.AMITIE, Statics.EVENT.DROLE,Statics.EVENT.COMPLOT, Statics.EVENT.TRISTE]
     this.rareMultipleTimesEvents = [Statics.EVENT.PLUIE] // reflechir pour INJURED
+    this.lastEliminated = undefined
   }
 
   presentation(){
@@ -80,11 +81,13 @@ export default class Team {
     return Candidate.TYPE[keys[ keys.length * Math.random() << 0]];
   }
 
-  eliminate(index) {
-    let eliminatedCandidate = this.candidates[index]
-    this.candidates.splice(index, 1);
+  eliminate(candidate) {
+    if (this.candidates.includes(candidate)) {
+      let eliminatedCandidateIndex = this.candidates.indexOf(candidate)
+      this.candidates.splice(eliminatedCandidateIndex, 1)
+      this.lastEliminated = candidate
+    }
     this.number = this.candidates.length;
-    return eliminatedCandidate
   }
   
   injured(index, candidate) {
@@ -146,7 +149,12 @@ export default class Team {
     texts.push({text: `Denis: ${eliminatedCandidate.name} prenez votre flambeau, venez me rejoindre`, color: "gray"})
     texts.push({text: `${eliminatedCandidate.name}: Peut être ai-je joué un jeu un peu trop ${eliminatedCandidate.type.typeName}`, color: this.color})
     texts.push({text: `Denis: ${eliminatedCandidate.name} les aventuriers de la tribu ${this.name} ont décidé de vous éliminer, et leur sentence est irrévocable !!!`, color: "gray"})
+    this.eliminate(eliminatedCandidate)
     return texts
+  }
+
+  getLastEliminated() {
+    return this.lastEliminated
   }
 
   mostVoteCandidate(array) {
@@ -220,11 +228,13 @@ export default class Team {
         texts.push({text: `${candidate.name}: J'ai fait le feu !!! Je savais que ça servirait d'être ${candidate.type.typeName}`, color: this.color})
         texts.push({text: `Denis: ${candidate.name} a réussi a faire le feu, prouesse remarquable chez les ${this.name} voilà qui va réchauffer leur coeurs !`, color: "gray"})
         this.rareSingleTimeEvents.push(EVENT.STOP_FIRE)
+        this.lovedByEverybody(candidate)
         break;
       case EVENT.STOP_FIRE:
         texts.push({text: `${candidate.name}: POUR JOSEEEEEEEEPPHHHHHHHHHHHHHHHH !!!!!!!!`, color: this.color})
         texts.push({text: `Denis: Impossible ! ${candidate.name} vient tout juste d'éteindre le précieux feu dans la tribu ${this.name} du presque jamais vu dans Koh-Lantah !`, color: "gray"})
         this.rareSingleTimeEvents.push(EVENT.MADE_FIRE)
+        this.hatedByEverybody(candidate)
         break;
       case EVENT.COLLIER:
         texts.push({text: `${candidate.name}: shhhhhhshhshhshshhhh ... je viens de trouver un collier d'immunité ...!!  Ok je vais devoir le cacher avant de rentrer au camps`, color: this.color})
@@ -257,6 +267,7 @@ export default class Team {
       case EVENT.CABANE_DESTRUCTED:
         texts.push({text: `${candidate.name}: et voilà j'ai détruit la cabane yes !`, color: this.color})
         this.singleTimeEvents.push(EVENT.CABANE)
+        this.hatedByEverybody(candidate)
         break;
       case EVENT.COMPLOT:
         texts.push({text: `${candidate.name}: go faire des alliances !`, color: this.color})
@@ -368,6 +379,20 @@ export default class Team {
   updateFaims(unite) {
     for (let candidate of this.candidates) {
       candidate.updateFaim(unite)
+    }
+  }
+
+  hatedByEverybody(hatedCandidate){
+    for (let candidate of this.candidates){
+      if (candidate !== hatedCandidate)
+        candidate.addEnnemy(hatedCandidate)
+    }
+  }
+
+  lovedByEverybody(lovedCandidate){
+    for (let candidate of this.candidates){
+      if (candidate !== lovedCandidate)
+        candidate.addFriend(lovedCandidate)
     }
   }
 
