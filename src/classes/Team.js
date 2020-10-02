@@ -120,7 +120,7 @@ export default class Team {
       texts.push({text: `Denis: La tribu ${this.name} a gagné l'épreuve d'immunité, voyons ce qu'il se passe sur leur camps !`, color: "gray"})
     }
     else if (camp === Team.CAMP.ECHEC_IMMUNITE) {
-      texts.push({text: `Denis: Malheureusement les ${this.name} reviennent perdant et vont devoir affronter le conseil allons faire un tour sur leur camps !`, color: "gray"})
+      texts.push({text: `Denis: Les ${this.name} reviennent sur le camps et vont devoir affronter le conseil allons faire un tour chez eux !`, color: "gray"})
     }
     texts = texts.concat(this.randomCampEvent())
     texts = texts.concat(this.randomCampEvent())
@@ -138,7 +138,7 @@ export default class Team {
     let votes =[]
     for (let candidate of this.candidates)
     {
-      let vote = candidate.vote(this.candidates.slice(), this.color)
+      let vote = candidate.vote(this.candidates.slice(), this.getImmunedCandidates(), this.color)
       if (vote.text){
         texts.push(vote.text)
       }
@@ -347,6 +347,26 @@ export default class Team {
     return strongest
   }
 
+  getStrongestFromFatigue(){
+    let strongest = this.candidates[0]
+    for (let candidate of this.candidates) {
+      if (candidate.getFatigue() < strongest.getFatigue()) {
+        strongest = candidate
+      }
+    }
+    return strongest
+  }
+
+  getWeakestFromFatigue(){
+    let weakest = this.candidates[0]
+    for (let candidate of this.candidates) {
+      if (candidate.getFatigue() < weakest.getFatigue()) {
+        weakest = candidate
+      }
+    }
+    return weakest
+  }
+
   congrats(competence) {
     let candidate = Statics.randomArray(this.candidates)
     let congratulatedCandidate = this.getStrongestFromCompetence(competence)
@@ -402,6 +422,14 @@ export default class Team {
         candidate.addFriend(lovedCandidate)
     }
   }
-
+  getImmunedCandidates() {
+    let candidates = []
+    for (let candidate of this.candidates) {
+      if (candidate.immunity) {
+        candidates.push(candidate)
+      }
+    }
+    return candidates
+  }
 }
  

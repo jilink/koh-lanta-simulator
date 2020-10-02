@@ -9,16 +9,12 @@ export default class Game {
     this.team3 = undefined
     this.semaine = 1
     this.solo = false
+    this.continue = true
     this.eliminates = []
-    this.week()
-    this.week()
-    this.week()
-    this.week()
-    this.week()
-    this.week()
-    this.week()
-    this.week()
-    this.week()
+    while(this.continue) {
+      this.week()
+    
+    }
   }
 
   presentation(){
@@ -27,8 +23,13 @@ export default class Game {
 
   week() {
     let texts = []
-    // let epreuveConfort = new Epreuve(this.solo, "confort")
-    // let epreuveImmunite = new Epreuve(this.solo, "imunite")
+    if (this.solo && (this.team3.candidates.length) < 5) {
+      texts = texts.concat(this.final(this.team3))
+      for (let text of texts) {
+        console.log(`%c ${text.text}`, `color: ${text.color}`);
+      }
+      return texts 
+    }
 
     texts.push({text: "Vie sur le camps", color: "green"})
     texts.push({text: `Denis:  Allons voir comment se porte la vie sur le camps pour nos candidats qui commencent leur semaine ${this.semaine}`, color: "gray"})
@@ -46,7 +47,7 @@ export default class Game {
     this.semaine++
     if (!this.solo && (this.team1.candidates.length + this.team2.candidates.length) < 8) {
       this.solo = true;
-      texts.push({text: `Denis: AH ! L'heure de la réunification est venue ! Nos 1 tribues n'en formeront qu'une seule, la tribu blanche !`, color: "gray"})
+      texts.push({text: `Denis: AH ! L'heure de la réunification est venue ! Nos deux tribus n'en formeront qu'une seule, la tribu blanche !`, color: "gray"})
       let team3Candidates = this.team1.candidates.concat(this.team2.candidates)
       this.team3 = new Team({name: "réunifiés", candidates: team3Candidates, color: "#000000"})    }
     for (let text of texts) {
@@ -131,12 +132,42 @@ export default class Game {
       texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.CAMP_NORMAL))
     }
     if (type === "immunité") {
+      texts.push({text: `Denis: ${winner.name} vous êtes immunisé pour le conseil de ce soir, je vous remets le totem !`, color: "gray"})
+      winner.immune()
       texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
+      winner.notImmune()
       this.eliminates.push(this.team3.getLastEliminated())
       console.log("le dernier eliminé est", this.eliminates.pop())
     }
 
     return texts
   
+  }
+
+  final(team) {
+    let texts = []
+    texts.push({text: "AH! C'est l'heure de la grand finale !!", color: "green"})
+    texts = texts.concat(this.orientation(team))
+    texts = texts.concat(this.poteaux(team))
+    this.continue = false
+    return texts
+  }
+
+  orientation(team) {
+    let texts = []
+    texts.push({text: "Commençons par l'épreuve d'orientation !!", color: "green"})
+    let loser = team.getWeakestFromFatigue()
+    texts.push({text: `${loser.name} perd`, color: "green"})
+    team.eliminate(loser)
+    return texts
+  }
+
+  poteaux(team) {
+    let texts = []
+    texts.push({text: "C'est l'heure des poteaux", color: "green"})
+    let winner = team.getStrongestFromFatigue()
+    texts.push({text: `${winner.name} gagne KOH LANTAH !!!!!!`, color: "green"})
+    team.candidates = [winner]
+    return texts
   }
 }

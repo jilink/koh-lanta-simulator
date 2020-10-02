@@ -189,6 +189,7 @@ export default class Candidate {
     this.items = []
     this.friends = []
     this.ennemies = []
+    this.immunity = false
   }
 
   presentation() {
@@ -207,6 +208,10 @@ export default class Candidate {
   updateFaim(unite) {
     let vitesseFaim = this.type.vitesseFaim || 1
     this.faim += unite * vitesseFaim
+  }
+
+  getFatigue() {
+    return this.fatigue
   }
 
   dialogue() {
@@ -229,8 +234,9 @@ export default class Candidate {
     return this.type[competence] || 1
   }
 
-  vote(candidates, color="white") {
+  vote(candidates, immunedCandidates, color="white") {
     // Vote for an ennemy, if no ennemies, don't vote for a friend, if everybody friend or no friend vote for somebody random that is not you
+    candidates = Statics.diffArray(candidates, immunedCandidates)
     if (this.ennemies.length) {
       let votedCandidate = Statics.randomArray(this.ennemies.slice(), this)
       if (candidates.includes(votedCandidate)) { // test if the ennemy is still in the team
@@ -247,6 +253,14 @@ export default class Candidate {
       }
     }
     return {vote: Statics.randomArray(candidates.slice(), this), text: {text: `${this.name}: Pour qui je vote ? Suspense`, color: color}}
+  }
+
+  immune() {
+    this.immunity = true
+  }
+
+  notImmune() {
+    this.immunity = false
   }
 
 }
