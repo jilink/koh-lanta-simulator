@@ -240,7 +240,7 @@ export default class Candidate {
     if (this.ennemies.length) {
       let votedCandidate = Statics.randomArray(this.ennemies.slice(), this)
       if (candidates.includes(votedCandidate)) { // test if the ennemy is still in the team
-        return {vote: votedCandidate, text: {text: `${this.name}: Ce soir je vote contre toi ${votedCandidate.name} car tu es trop ${votedCandidate.type.typeName}`, color: color }}
+        return {vote: votedCandidate, text: {text: `${this.name}: Ce soir je vote contre toi ${votedCandidate.name} car tu es trop ${votedCandidate.type.typeName}`, color: color, key: Statics.uniqueKey() }}
       }
     }
     if (this.friends.length) {
@@ -248,11 +248,11 @@ export default class Candidate {
       if (notFriendsCandidates.length) {
         let votedCandidate = Statics.randomArray(notFriendsCandidates.slice(), this)
         if (candidates.includes(votedCandidate)) { // test if the friend is still in the team
-          return {vote: votedCandidate, text: {text: `${this.name}: Désolé mais ce soir je vote contre toi ${votedCandidate.name} c'est pas personel juste que j'ai moin d'afinité avec toi`, color: color }}
+          return {vote: votedCandidate, text: {text: `${this.name}: Désolé mais ce soir je vote contre toi ${votedCandidate.name} c'est pas personel juste que j'ai moin d'afinité avec toi`, color: color , key: Statics.uniqueKey()}}
         }
       }
     }
-    return {vote: Statics.randomArray(candidates.slice(), this), text: {text: `${this.name}: Pour qui je vote ? Suspense`, color: color}}
+    return {vote: Statics.randomArray(candidates.slice(), this), text: {text: `${this.name}: Pour qui je vote ? Suspense`, color: color, key: Statics.uniqueKey()}}
   }
 
   immune() {

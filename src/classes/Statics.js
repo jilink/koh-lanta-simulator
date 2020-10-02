@@ -191,4 +191,8 @@ export default class Statics {
       .concat(arr2)
       .filter(item => !arr1.includes(item) || !arr2.includes(item));
   }
+
+  static uniqueKey() {
+   return '_' + Math.random().toString(36).substr(2, 9);
+  }
 }

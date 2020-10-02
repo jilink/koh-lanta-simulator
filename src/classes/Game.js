@@ -11,10 +11,10 @@ export default class Game {
     this.solo = false
     this.continue = true
     this.eliminates = []
-    while(this.continue) {
-      this.week()
+    // while(this.continue) {
+    //   this.week()
     
-    }
+    // }
   }
 
   presentation(){
@@ -31,8 +31,8 @@ export default class Game {
       return texts 
     }
 
-    texts.push({text: "Vie sur le camps", color: "green"})
-    texts.push({text: `Denis:  Allons voir comment se porte la vie sur le camps pour nos candidats qui commencent leur semaine ${this.semaine}`, color: "gray"})
+    texts.push({text: "Vie sur le camps", color: "green", key: Statics.uniqueKey()})
+    texts.push({text: `Denis:  Allons voir comment se porte la vie sur le camps pour nos candidats qui commencent leur semaine ${this.semaine}`, color: "gray", key: Statics.uniqueKey()})
     if (!this.solo) {
       texts = texts.concat(this.team1.events(this.semaine, Team.CAMP.NORMAL))
       texts = texts.concat(this.team2.events(this.semaine, Team.CAMP.NORMAL))
@@ -61,16 +61,16 @@ export default class Game {
     let epreuve = Statics.randomEpreuve()
 
     if (type === "confort"){
-      texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray"})
+      texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray", key: Statics.uniqueKey()})
     }
     if (type === "immunité"){
-      texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray"})
+      texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray", key: Statics.uniqueKey()})
     }
-    texts.push({text:"-------------------", color: "black"})
-    texts.push({text:"-------------------", color: "black"})
+    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
+    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
     let winnerTeam = this.winnerEquipes(this.team1, this.team2, epreuve)
     let loserTeam; 
-    texts.push({text: `Denis: AH ! L'équipe des ${winnerTeam.name} remporte l'épreuve ${epreuve.name} !`, color: "gray"})
+    texts.push({text: `Denis: AH ! L'équipe des ${winnerTeam.name} remporte l'épreuve ${epreuve.name} !`, color: "gray", key: Statics.uniqueKey()})
     texts = texts.concat(winnerTeam.congrats(epreuve.type))
     this.team1.updateFatigues(epreuve.fatigue)
     this.team2.updateFatigues(epreuve.fatigue)
@@ -84,14 +84,14 @@ export default class Game {
     }
     if (type === "confort"){
       loserTeam.updateFaims(5)
-      texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir profiter de la récompense pendant que les autres auront grave le seum`, color: "gray"})
-      texts.push({text:"-------------------", color: "black"})
+      texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir profiter de la récompense pendant que les autres auront grave le seum`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text:"", color: "white", key: Statics.uniqueKey()})
       texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_CONFORT))
       texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_CONFORT))
     }
     if (type === "immunité") {
-      texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir rentrer sur le camps serein je vous remets le totem`, color: "gray"})
-      texts.push({text:"-------------------", color: "black"})
+      texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir rentrer sur le camps serein je vous remets le totem`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text:"", color: "white", key: Statics.uniqueKey()})
       texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_IMMUNITE))
       texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
       this.eliminates.push(loserTeam.getLastEliminated())
@@ -117,22 +117,22 @@ export default class Game {
     let epreuve = Statics.randomEpreuve()
 
     if (type === "confort"){
-      texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray"})
+      texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray", key: Statics.uniqueKey()})
     }
     if (type === "immunité"){
-      texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray"})
+      texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray", key: Statics.uniqueKey()})
     }
-    texts.push({text:"-------------------", color: "black"})
-    texts.push({text:"-------------------", color: "black"})
+    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
+    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
     let winner = this.team3.getStrongestFromCompetence(epreuve.type)
-    texts.push({text: `Denis: AH ! ${winner.name} remporte l'épreuve ${epreuve.name} !`, color: "gray"})
+    texts.push({text: `Denis: AH ! ${winner.name} remporte l'épreuve ${epreuve.name} !`, color: "gray", key: Statics.uniqueKey()})
 
     if (type === "confort"){
       this.team3.updateFaims(5) // exclure le gagnant
       texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.CAMP_NORMAL))
     }
     if (type === "immunité") {
-      texts.push({text: `Denis: ${winner.name} vous êtes immunisé pour le conseil de ce soir, je vous remets le totem !`, color: "gray"})
+      texts.push({text: `Denis: ${winner.name} vous êtes immunisé pour le conseil de ce soir, je vous remets le totem !`, color: "gray", key: Statics.uniqueKey()})
       winner.immune()
       texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
       winner.notImmune()
@@ -146,7 +146,7 @@ export default class Game {
 
   final(team) {
     let texts = []
-    texts.push({text: "AH! C'est l'heure de la grand finale !!", color: "green"})
+    texts.push({text: "AH! C'est l'heure de la grand finale !!", color: "green", key: Statics.uniqueKey()})
     texts = texts.concat(this.orientation(team))
     texts = texts.concat(this.poteaux(team))
     this.continue = false
@@ -155,18 +155,18 @@ export default class Game {
 
   orientation(team) {
     let texts = []
-    texts.push({text: "Commençons par l'épreuve d'orientation !!", color: "green"})
+    texts.push({text: "Commençons par l'épreuve d'orientation !!", color: "green", key: Statics.uniqueKey()})
     let loser = team.getWeakestFromFatigue()
-    texts.push({text: `${loser.name} perd`, color: "green"})
+    texts.push({text: `${loser.name} perd`, color: "green", key: Statics.uniqueKey()})
     team.eliminate(loser)
     return texts
   }
 
   poteaux(team) {
     let texts = []
-    texts.push({text: "C'est l'heure des poteaux", color: "green"})
+    texts.push({text: "C'est l'heure des poteaux", color: "green", key: Statics.uniqueKey()})
     let winner = team.getStrongestFromFatigue()
-    texts.push({text: `${winner.name} gagne KOH LANTAH !!!!!!`, color: "green"})
+    texts.push({text: `${winner.name} gagne KOH LANTAH !!!!!!`, color: "green", key: Statics.uniqueKey()})
     team.candidates = [winner]
     return texts
   }
