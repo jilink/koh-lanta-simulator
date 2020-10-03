@@ -53,7 +53,7 @@ export default class Team {
       {name: "Maurice", genre:"H"},
       {name: "Didier", genre:"H"},
       {name: "Nathalie", genre:"F"},
-      {name: "Josheph", genre:"H"},
+      {name: "Joseph", genre:"H"},
       {name: "Ahmad", genre:"H"},
       {name: "Pascal", genre:"H"},
       {name: "Lola", genre:"F"},
@@ -106,7 +106,7 @@ export default class Team {
     if (camp === Team.CAMP.NORMAL && semaine === 1)
     {
       texts.push({text: `Denis: C'est le début de l'aventure et l'heure des présentations chez les ${this.name}`, color: "gray", key: Statics.uniqueKey()})
-      texts.push({text:"", color: "white", key: Statics.uniqueKey()})
+      texts.push({text:"Présentations", color: "green", key: Statics.uniqueKey()})
       texts = texts.concat(this.presentations())
       return texts;
     }
@@ -124,8 +124,8 @@ export default class Team {
     }
     texts = texts.concat(this.randomCampEvent())
     texts = texts.concat(this.randomCampEvent())
-    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
     if (camp === Team.CAMP.ECHEC_IMMUNITE) {
+      texts.push({text:"Conseil", color: "green", key: Statics.uniqueKey()})
       texts.push({text: `Denis: C'est l'heure du conseil, les ${this.name} vont devoir décider de l'aventurier dont ils doivent se séparer !`, color: "gray", key: Statics.uniqueKey()})
       texts = texts.concat(this.conseil(false))
     }
@@ -311,10 +311,9 @@ export default class Team {
         randomCandidate.addFriend(randomCandidate2)
         randomCandidate2.addFriend(randomCandidate)
 
-        texts.push({text:"", color: "white", key: Statics.uniqueKey()})
+        texts.push({text:"Dialogue", color: "green", key: Statics.uniqueKey()})
       }
     }
-    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
     return texts;
   }
 

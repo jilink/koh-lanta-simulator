@@ -11,10 +11,9 @@ export default class Game {
     this.solo = false
     this.continue = true
     this.eliminates = []
-    // while(this.continue) {
-    //   this.week()
-    
-    // }
+    this.currentText = []
+    this.currentTextIndex = 10
+    this.weekText = []
   }
 
   presentation(){
@@ -26,7 +25,7 @@ export default class Game {
     if (this.solo && (this.team3.candidates.length) < 5) {
       texts = texts.concat(this.final(this.team3))
       for (let text of texts) {
-        console.log(`%c ${text.text}`, `color: ${text.color}`);
+        // console.log(`%c ${text.text}`, `color: ${text.color}`);
       }
       return texts 
     }
@@ -51,7 +50,7 @@ export default class Game {
       let team3Candidates = this.team1.candidates.concat(this.team2.candidates)
       this.team3 = new Team({name: "réunifiés", candidates: team3Candidates, color: "#000000"})    }
     for (let text of texts) {
-      console.log(`%c ${text.text}`, `color: ${text.color}`);
+      // console.log(`%c ${text.text}`, `color: ${text.color}`);
     }
     return texts;
   }
@@ -61,13 +60,13 @@ export default class Game {
     let epreuve = Statics.randomEpreuve()
 
     if (type === "confort"){
+      texts.push({text: "Epreuve de confort", color: "green", key: Statics.uniqueKey()})
       texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray", key: Statics.uniqueKey()})
     }
     if (type === "immunité"){
+      texts.push({text: "Epreuve d'immunité", color: "green", key: Statics.uniqueKey()})
       texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray", key: Statics.uniqueKey()})
     }
-    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
-    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
     let winnerTeam = this.winnerEquipes(this.team1, this.team2, epreuve)
     let loserTeam; 
     texts.push({text: `Denis: AH ! L'équipe des ${winnerTeam.name} remporte l'épreuve ${epreuve.name} !`, color: "gray", key: Statics.uniqueKey()})
@@ -85,14 +84,16 @@ export default class Game {
     if (type === "confort"){
       loserTeam.updateFaims(5)
       texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir profiter de la récompense pendant que les autres auront grave le seum`, color: "gray", key: Statics.uniqueKey()})
-      texts.push({text:"", color: "white", key: Statics.uniqueKey()})
+      texts.push({text: "Vie sur le camps", color: "green", key: Statics.uniqueKey()})
       texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_CONFORT))
+      texts.push({text: "Vie sur le camps", color: "green", key: Statics.uniqueKey()})
       texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_CONFORT))
     }
     if (type === "immunité") {
       texts.push({text: `Denis: Bravo les ${winnerTeam.name} vous allez pouvoir rentrer sur le camps serein je vous remets le totem`, color: "gray", key: Statics.uniqueKey()})
-      texts.push({text:"", color: "white", key: Statics.uniqueKey()})
+      texts.push({text: "Vie sur le camps", color: "green", key: Statics.uniqueKey()})
       texts = texts.concat(winnerTeam.events(this.semaine, Team.CAMP.VICTOIRE_IMMUNITE))
+      texts.push({text: "Vie sur le camps", color: "green", key: Statics.uniqueKey()})
       texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
       this.eliminates.push(loserTeam.getLastEliminated())
       console.log("le dernier eliminé est", this.eliminates.pop())
@@ -117,21 +118,23 @@ export default class Game {
     let epreuve = Statics.randomEpreuve()
 
     if (type === "confort"){
+      texts.push({text: "Epreuve de confort", color: "green", key: Statics.uniqueKey()})
       texts.push({text: `Denis: L'épreuve de confort d'aujourd'hui est : ${epreuve.name} ! Pour gagner fiez vous à votre ${epreuve.type} !`, color: "gray", key: Statics.uniqueKey()})
     }
     if (type === "immunité"){
+      texts.push({text: "Epreuve d'immunité", color: "green", key: Statics.uniqueKey()})
       texts.push({text: `Denis: Nous y voici, c'est l'heure de l'épreuve d'immunité : ${epreuve.name} ! Votre seul chance de gagner aujourd'hui, faire preuve de ${epreuve.type} ! GO !`, color: "gray", key: Statics.uniqueKey()})
     }
-    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
-    texts.push({text:"", color: "white", key: Statics.uniqueKey()})
     let winner = this.team3.getStrongestFromCompetence(epreuve.type)
     texts.push({text: `Denis: AH ! ${winner.name} remporte l'épreuve ${epreuve.name} !`, color: "gray", key: Statics.uniqueKey()})
 
     if (type === "confort"){
       this.team3.updateFaims(5) // exclure le gagnant
+      texts.push({text: "Vie sur le camps", color: "green", key: Statics.uniqueKey()})
       texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.CAMP_NORMAL))
     }
     if (type === "immunité") {
+      texts.push({text: "Vie sur le camps", color: "green", key: Statics.uniqueKey()})
       texts.push({text: `Denis: ${winner.name} vous êtes immunisé pour le conseil de ce soir, je vous remets le totem !`, color: "gray", key: Statics.uniqueKey()})
       winner.immune()
       texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
@@ -146,6 +149,7 @@ export default class Game {
 
   final(team) {
     let texts = []
+    texts.push({text: "Finale", color: "green", key: Statics.uniqueKey()})
     texts.push({text: "AH! C'est l'heure de la grand finale !!", color: "green", key: Statics.uniqueKey()})
     texts = texts.concat(this.orientation(team))
     texts = texts.concat(this.poteaux(team))
@@ -169,5 +173,20 @@ export default class Game {
     texts.push({text: `${winner.name} gagne KOH LANTAH !!!!!!`, color: "green", key: Statics.uniqueKey()})
     team.candidates = [winner]
     return texts
+  }
+
+  getCurrentText() {
+    if (!this.continue) {
+      this.currentText = this.weekText.slice(this.weekText.length - 10, this.weekText.length) 
+      return this.currentText
+    }
+    if (this.currentText.length < 10) {
+      this.weekText = this.currentText.concat(this.week())
+      this.currentTextIndex = 10
+    }
+    this.currentText = this.weekText.slice(this.currentTextIndex - 10, this.currentTextIndex) 
+    this.currentTextIndex+=3
+    console.log(this.currentText)
+    return this.currentText
   }
 }
