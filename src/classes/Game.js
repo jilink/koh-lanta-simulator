@@ -1,8 +1,7 @@
 import Team from './Team'
 import Statics from './Statics'
 export default class Game {
-  constructor(name="spéciale", team1=undefined, team2=undefined){
-    let color
+  constructor({name="spéciale", team1=undefined, team2=undefined}){
     this.name = name
     this.team1 = team1 || new Team({color: "#fa4e65"})
     this.team2 = team2 || new Team({color: "#d7c490"})

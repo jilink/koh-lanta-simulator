@@ -12,13 +12,13 @@ export default class Team {
  
   constructor({name=undefined, number=5, candidates=undefined, color="blue"}) {
     this.name = name || this.getRandomTeamName();
-    if (candidates && candidates.length > number) {
+    if (candidates && candidates.length > parseInt(number, 10)) {
       this.number =candidates.length
     }
     else {
-      this.number = number;
+      this.number = parseInt(number, 10);
     }
-    this.candidates = candidates || this.getRandomCandidates(number)
+    this.candidates = candidates || this.getRandomCandidates(this.number)
     this.color=color
     this.items = []
     this.singleTimeEvents = [Statics.EVENT.FOUND_WATER, Statics.EVENT.FOUND_ALCOHOL, Statics.EVENT.MANIOK, Statics.EVENT.CABANE]

@@ -1,5 +1,6 @@
 import React from 'react';
 import Game from '../classes/Game';
+import Team from '../classes/Team';
 import TextGame from './TextGame';
 
 // import { Container, Row, Col, Button } from 'react-bootstrap';
@@ -12,8 +13,9 @@ class GameComponent extends React.Component {
   }
 
   componentDidMount(){
-    this.game = new Game()
-    this.currentWeek = this.game.week()
+   	let team1 = new Team({color: "#fa4e65", number: this.props.numberCandidates})
+   	let team2 = new Team({color: "#d7c490", number: this.props.numberCandidates})
+    this.game = new Game({team1: team1, team2: team2})
     this.setState({ texts: this.game.getCurrentText()})
   }
   
