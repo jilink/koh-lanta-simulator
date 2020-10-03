@@ -12,6 +12,7 @@ const defaultStyles = {
   alignItems: 'center',
   fontSize: '20px',
   fontFamily: "'Kanit', sans-serif",
+  border: '1px solid white',
 }
 
 export default class TextGame extends React.PureComponent {
@@ -23,11 +24,11 @@ export default class TextGame extends React.PureComponent {
     return (
       <div
         style={{
-          backgroundColor: '#70C1B3',
           overflow: 'hidden',
           cursor: 'pointer',
           margin: 0,
           padding: 0,
+
         }}>
         <Transition
           items={this.props.texts} keys={item => item.key}

@@ -1,6 +1,8 @@
 import Team from './Team'
 import Statics from './Statics'
 export default class Game {
+
+  static numberDisplay = 7
   constructor({name="spéciale", team1=undefined, team2=undefined}){
     this.name = name
     this.team1 = team1 || new Team({color: "#fa4e65"})
@@ -11,7 +13,7 @@ export default class Game {
     this.continue = true
     this.eliminates = []
     this.currentText = []
-    this.currentTextIndex = 10
+    this.currentTextIndex = Game.numberDisplay
     this.weekText = []
   }
 
@@ -176,14 +178,14 @@ export default class Game {
 
   getCurrentText() {
     if (!this.continue) {
-      this.currentText = this.weekText.slice(this.weekText.length - 10, this.weekText.length) 
+      this.currentText = this.weekText.slice(this.weekText.length - Game.numberDisplay, this.weekText.length)
       return this.currentText
     }
-    if (this.currentText.length < 10) {
+    if (this.currentText.length < Game.numberDisplay) {
       this.weekText = this.currentText.concat(this.week())
-      this.currentTextIndex = 10
+      this.currentTextIndex = Game.numberDisplay
     }
-    this.currentText = this.weekText.slice(this.currentTextIndex - 10, this.currentTextIndex) 
+    this.currentText = this.weekText.slice(this.currentTextIndex - Game.numberDisplay, this.currentTextIndex)
     this.currentTextIndex+=3
     console.log(this.currentText)
     return this.currentText

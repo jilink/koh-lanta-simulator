@@ -248,7 +248,7 @@ export default class Candidate {
       if (notFriendsCandidates.length) {
         let votedCandidate = Statics.randomArray(notFriendsCandidates.slice(), this)
         if (candidates.includes(votedCandidate)) { // test if the friend is still in the team
-          return {vote: votedCandidate, text: {text: `${this.name}: Désolé mais ce soir je vote contre toi ${votedCandidate.name} c'est pas personel juste que j'ai moin d'afinité avec toi`, color: color , key: Statics.uniqueKey()}}
+          return {vote: votedCandidate, text: {text: `${this.name}: Désolé mais ce soir je vote contre toi ${votedCandidate.name} c'est pas personel juste que j'ai moins d'afinité avec toi`, color: color , key: Statics.uniqueKey()}}
         }
       }
     }
