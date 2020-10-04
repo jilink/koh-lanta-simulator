@@ -182,8 +182,9 @@ export default class Candidate {
 
   constructor(name, type, genre) {
     this.name = name;
-    this.type = type;
-    this.genre = genre;
+	console.log(name)
+    this.type = type || Candidate.TYPE.NORMAL;
+    this.genre = genre || "H";
     this.faim = 0; // pourcentage de faim
     this.fatigue = 0; // pourcentage de fatigue
     this.items = []

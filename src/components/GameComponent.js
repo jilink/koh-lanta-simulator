@@ -13,8 +13,8 @@ class GameComponent extends React.Component {
   }
 
   componentDidMount(){
-   	let team1 = new Team({color: "#fa4e65", number: this.props.numberCandidates})
-   	let team2 = new Team({color: "#d7c490", number: this.props.numberCandidates})
+   	let team1 = new Team({color: "#fa4e65", number: this.props.numberCandidates, candidates: this.props.team1Candidates})
+   	let team2 = new Team({color: "#d7c490", number: this.props.numberCandidates, candidates: this.props.team2Candidates})
     this.game = new Game({team1: team1, team2: team2})
     this.setState({ texts: this.game.getCurrentText()})
   }
