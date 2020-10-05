@@ -19,6 +19,8 @@ class FormComponent extends React.Component {
 		step: 1,
 		team1Candidates: undefined,
 		team2Candidates: undefined,
+		team1Name: undefined,
+		team2Name: undefined,
 		teams: {
 		  team1: null,
 		  team2: null,
@@ -109,8 +111,8 @@ class FormComponent extends React.Component {
 	  for (let i=0; i<this.state.numberCandidates; i++) {
 		team1Form.push(
 			<Row key={i} onChange={(e) => this.handleChangeCandidate(1, i, e)}>
-			  <Col>
-				<Form.Control name={`name`} placeholder="Name" />
+			  <Col className="mb-3">
+				<Form.Control name={`name`} placeholder="Name" maxLength="25"/>
 			  </Col>
 			  <Col>
 				<Form.Control as="select" name={`genre`}>
@@ -127,8 +129,8 @@ class FormComponent extends React.Component {
 			)
 		team2Form.push(
 			<Row key={i} onChange={(e) => this.handleChangeCandidate(1, i, e)}>
-			  <Col>
-				<Form.Control name={`name`} placeholder="Name" />
+			  <Col className="mb-3">
+				<Form.Control name={`name`} placeholder="Name" maxLength="25"/>
 			  </Col>
 			  <Col>
 				<Form.Control as="select" name={`genre`}>
@@ -166,9 +168,19 @@ class FormComponent extends React.Component {
 			</Form>
 			:
 			<Form>
-			<h1> TEAM 1 </h1>
+			  <Col>
+				  <Row>
+					  <h1> TEAM 1 </h1>
+					  <Form.Control name={`team1Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
+				  </Row>
+			  </Col>
 			  {team1Form}
-			<h1> TEAM 2 </h1>
+			  <Col>
+				  <Row>
+					  <h1> TEAM 2 </h1>
+					  <Form.Control name={`team2Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
+				  </Row>
+			  </Col>
 			  {team2Form}
 			  <Button onClick={this.handleSubmit} variant="primary">
 			  Submit
@@ -178,7 +190,7 @@ class FormComponent extends React.Component {
 			}
 		  </div>
 		:
-		  <GameComponent numberCandidates={this.state.numberCandidates} team1Candidates={this.state.team1Candidates} team2Candidates={this.state.team2Candidates}/>
+		  <GameComponent numberCandidates={this.state.numberCandidates} team1Candidates={this.state.team1Candidates} team2Candidates={this.state.team2Candidates} team1Name={this.state.team1Name} team2Name={this.state.team2Name} />
 		}
 		</Container>
         );
