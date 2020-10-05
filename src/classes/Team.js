@@ -12,13 +12,13 @@ export default class Team {
  
   constructor({name=undefined, number=5, candidates=undefined, color="blue"}) {
     this.name = name || this.getRandomTeamName();
-    if (candidates && candidates.length > parseInt(number, 10)) {
+    if (candidates && candidates.length >= parseInt(number, 10)) {
       this.number =candidates.length
     }
     else {
       this.number = parseInt(number, 10);
+      this.candidates = this.getRandomCandidates(this.number, candidates)
     }
-    this.candidates = candidates || this.getRandomCandidates(this.number)
     this.color=color
     this.items = []
     this.singleTimeEvents = [Statics.EVENT.FOUND_WATER, Statics.EVENT.FOUND_ALCOHOL, Statics.EVENT.MANIOK, Statics.EVENT.CABANE]
@@ -32,7 +32,7 @@ export default class Team {
     console.log(`Bonjour nous somme l'équipe ${this.name}, actuellement nous sommes ${this.number}`)
   }
 
-  getRandomCandidates(number){
+  getRandomCandidates(number, candidates=undefined){
     let names = [
       {name:"Claude", genre:"H"},
       {name:"Roger", genre:"H"},
@@ -65,15 +65,18 @@ export default class Team {
       {name: "Anne", genre:"F"} 
     ]
 
-    let candidates=[]
+    let addCandidates=[]
+    if (candidates){
+      addCandidates = addCandidates.concat(candidates)
+    }
 
-    for (let i=0; i<number; i++){
+    for (let i=addCandidates.length; i<number; i++){
       const randomIndex = Math.floor(Math.random() * names.length)
       const randomName = names[randomIndex];
       names.splice(randomIndex, 1);
-      candidates.push(new Candidate(randomName.name, this.getRandomType(), randomName.genre))
+      addCandidates.push(new Candidate(randomName.name, this.getRandomType(), randomName.genre))
     }
-    return candidates
+    return addCandidates
   }
   
   getRandomTeamName(){ // à deplacer dans Game principal pour éviter les doublons
