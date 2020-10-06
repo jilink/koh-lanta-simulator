@@ -1,9 +1,12 @@
 import React from 'react';
+import { SliderPicker } from 'react-color';
+
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 import GameComponent from './GameComponent';
 import Candidate from '../classes/Candidate';
 import Team from '../classes/Team';
@@ -21,6 +24,8 @@ class FormComponent extends React.Component {
 		team2Candidates: undefined,
 		team1Name: undefined,
 		team2Name: undefined,
+		team1Color: '#fa4e65',
+		team2Color: '#d7c490',
 		teams: {
 		  team1: null,
 		  team2: null,
@@ -39,6 +44,22 @@ class FormComponent extends React.Component {
   handleChange(event) {
 	this.setState({ [event.target.name]: event.target.value });
 	console.log(this.state)
+  }
+
+  handleChangeTeam1ColorDrag = (color) => {
+	this.setState({ team1Color: color.hex });
+  }
+
+  handleChangeTeam2ColorDrag = (color) => {
+	this.setState({ team2Color: color.hex });
+  }
+
+  handleChangeTeam1Color = (color) => {
+	this.setState({ team1Color: color.hex });
+  }
+
+  handleChangeTeam2Color = (color) => {
+	this.setState({ team2Color: color.hex });
   }
 
   handleChangeCandidate(team, candidate, event) {
@@ -112,7 +133,7 @@ class FormComponent extends React.Component {
 		team1Form.push(
 			<Row key={i} onChange={(e) => this.handleChangeCandidate(1, i, e)}>
 			  <Col className="mb-3">
-				<Form.Control name={`name`} placeholder="Name" maxLength="25"/>
+				<Form.Control name={`name`} placeholder="Nom" maxLength="25"/>
 			  </Col>
 			  <Col>
 				<Form.Control as="select" name={`genre`}>
@@ -130,7 +151,7 @@ class FormComponent extends React.Component {
 		team2Form.push(
 			<Row key={i} onChange={(e) => this.handleChangeCandidate(1, i, e)}>
 			  <Col className="mb-3">
-				<Form.Control name={`name`} placeholder="Name" maxLength="25"/>
+				<Form.Control name={`name`} placeholder="Nom" maxLength="25"/>
 			  </Col>
 			  <Col>
 				<Form.Control as="select" name={`genre`}>
@@ -168,33 +189,47 @@ class FormComponent extends React.Component {
 			</Form>
 			:
 			<Form>
-			  <Col>
-				  <Row>
-					  <h1> TEAM 1 </h1>
-					  <Form.Control name={`team1Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
-				  </Row>
-			  </Col>
-			  {team1Form}
-			  <Col>
-				  <Row>
-					  <h1> TEAM 2 </h1>
-					  <Form.Control name={`team2Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
-				  </Row>
-			  </Col>
-			  {team2Form}
-			  <Button onClick={this.handleSubmit} variant="primary">
-			  Submit
-			  </Button>
+				<Row className="align-items-center justify-content-center">
+					<Col className="mb-3">
+						<h1 className="text-white text-center text-stroke" style={{background: this.state.team1Color}}> TRIBU 1 </h1>
+					</Col>
+				</Row>
+				<Row className="align-items-center justify-content-center">
+					<Col className="mb-3">
+						<Form.Control name={`team1Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
+					</Col>
+					<Col className="mb-3">
+						<SliderPicker color={ this.state.team1Color } onChange={ this.handleChangeTeam1ColorDrag }onChangeComplete={ this.handleChangeTeam1Color }/>
+					</Col>
+				</Row>
+				{team1Form}
+				<Row className="align-items-center justify-content-center">
+					<Col className="mb-3">
+						<h1 className="text-white text-center text-stroke" style={{background: this.state.team2Color}}> TRIBU 2 </h1>
+					</Col>
+				</Row>
+				<Row className="align-items-center justify-content-center">
+					<Col className="mb-3">
+						<Form.Control name={`team2Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
+					</Col>
+					<Col className="mb-3">
+						<SliderPicker color={ this.state.team2Color } onChange={ this.handleChangeTeam2ColorDrag }onChangeComplete={ this.handleChangeTeam2Color }/>
+					</Col>
+				</Row>
+				{team2Form}
+				<Button onClick={this.handleSubmit} variant="primary">
+					Submit
+				</Button>
 			</Form>
 
-			}
+			  }
 		  </div>
-		:
-		  <GameComponent numberCandidates={this.state.numberCandidates} team1Candidates={this.state.team1Candidates} team2Candidates={this.state.team2Candidates} team1Name={this.state.team1Name} team2Name={this.state.team2Name} />
-		}
-		</Container>
-        );
-    }
+		  :
+		  <GameComponent numberCandidates={this.state.numberCandidates} team1Candidates={this.state.team1Candidates} team2Candidates={this.state.team2Candidates} team1Name={this.state.team1Name} team2Name={this.state.team2Name} team1Color={this.state.team1Color} team2Color={this.state.team2Color} />
+			  }
+		  </Container>
+		);
+	}
 }
 
 export default FormComponent;
