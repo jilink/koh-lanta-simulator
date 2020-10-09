@@ -26,7 +26,9 @@ class GameComponent extends React.Component {
     render() {
         return (
           <div>
-            <TextGame texts={this.state.texts}/>
+            <div>
+              <TextGame texts={this.state.texts}/>
+            </div>
             <button onClick={this.next}>Next</button>
           </div>
         );

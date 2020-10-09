@@ -11,8 +11,9 @@ const defaultStyles = {
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: '20px',
-  fontFamily: "'Kanit', sans-serif",
   border: '1px solid white',
+  height: 'max-content',
+  padding: 5,
 }
 
 export default class TextGame extends React.PureComponent {
@@ -20,29 +21,37 @@ export default class TextGame extends React.PureComponent {
       super(props);
     }
 
+  scrollToBottom = () => {
+    setTimeout(() => this.messagesEnd.scrollIntoView({ behavior: "smooth" }), 150);
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     return (
-      <div
-        style={{
-          overflow: 'hidden',
-          cursor: 'pointer',
-          margin: 0,
-          padding: 0,
-
-        }}>
+      <div className="overflow-auto" style={{ height: "500px"}}>
         <Transition
           items={this.props.texts} keys={item => item.key}
           //initial={null}
-          from={{ overflow: 'hidden', height: 0, opacity: 0 }}
-          enter={{ height: 50, opacity: 1}}
-          leave={{ height: 0, opacity: 0}}
-          trail={500}>
+          from={{ overflow: 'hidden', opacity: 0 }}
+          enter={{ opacity: 1}}
+          leave={{ opacity: 1}}
+          >
           {item => styles => (
-            <animated.div style={{background:item.color,...defaultStyles, ...styles }}>
+            <animated.div style={{background:item.color,...defaultStyles }}>
               {item.text}
             </animated.div>
           )}
         </Transition>
+         <div style={{ float:"left", clear: "both" }}
+                     ref={(el) => { this.messagesEnd = el; }}>
+         </div>
       </div>
     )
   }

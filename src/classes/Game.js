@@ -2,7 +2,7 @@ import Team from './Team'
 import Statics from './Statics'
 export default class Game {
 
-  static numberDisplay = 7
+  static numberDisplay = 10
   constructor({name="spéciale", team1=undefined, team2=undefined}){
     this.name = name
     this.team1 = team1 || new Team({color: "#fa4e65"})
@@ -186,7 +186,7 @@ export default class Game {
       this.currentTextIndex = Game.numberDisplay
     }
     this.currentText = this.weekText.slice(this.currentTextIndex - Game.numberDisplay, this.currentTextIndex)
-    this.currentTextIndex+=3
+    this.currentTextIndex+=6
     console.log(this.currentText)
     return this.currentText
   }

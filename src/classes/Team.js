@@ -14,6 +14,7 @@ export default class Team {
     this.name = name || this.getRandomTeamName();
     if (candidates && candidates.length >= parseInt(number, 10)) {
       this.number =candidates.length
+      this.candidates = candidates
     }
     else {
       this.number = parseInt(number, 10);
