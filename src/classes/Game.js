@@ -15,6 +15,10 @@ export default class Game {
     this.currentText = []
     this.currentTextIndex = Game.numberDisplay
     this.weekText = []
+    this.team1DisplayCandidates = this.team1.candidates.slice()
+    this.team2DisplayCandidates = this.team2.candidates.slice()
+    this.team3DisplayCandidates = []
+    this.displaySolo = false
   }
 
   presentation(){
@@ -49,7 +53,7 @@ export default class Game {
       this.solo = true;
       texts.push({text: `Denis: AH ! L'heure de la réunification est venue ! Nos deux tribus n'en formeront qu'une seule, la tribu blanche !`, color: "gray"})
       let team3Candidates = this.team1.candidates.concat(this.team2.candidates)
-      this.team3 = new Team({name: "réunifiés", candidates: team3Candidates, color: "#000000"})    }
+      this.team3 = new Team({name: "Réunifiés", candidates: team3Candidates, color: "#000000"})    }
     for (let text of texts) {
       // console.log(`%c ${text.text}`, `color: ${text.color}`);
     }
@@ -182,12 +186,36 @@ export default class Game {
       return this.currentText
     }
     if (this.currentText.length < Game.numberDisplay) {
+      this.displaySolo = this.solo
+      if (this.solo && this.team3) {
+        this.team3DisplayCandidates = this.team3.candidates.slice()
+      }
+      else {
+        this.team1DisplayCandidates = this.team1.candidates.slice()
+        this.team2DisplayCandidates = this.team2.candidates.slice()
+      }
       this.weekText = this.currentText.concat(this.week())
       this.currentTextIndex = Game.numberDisplay
     }
     this.currentText = this.weekText.slice(this.currentTextIndex - Game.numberDisplay, this.currentTextIndex)
-    this.currentTextIndex+=6
+    this.currentTextIndex+=4
     console.log(this.currentText)
     return this.currentText
+  }
+
+  getTeam1DisplayCandidates () {
+    return this.team1DisplayCandidates
+  }
+
+  getTeam2DisplayCandidates () {
+    return this.team2DisplayCandidates
+  }
+
+  getTeam3DisplayCandidates () {
+    return this.team3DisplayCandidates
+  }
+
+  getDisplaySolo () {
+    return this.displaySolo
   }
 }

@@ -25,17 +25,13 @@ export default class TextGame extends React.PureComponent {
     setTimeout(() => this.messagesEnd.scrollIntoView({ behavior: "smooth" }), 150);
   }
 
-  componentDidMount() {
-    this.scrollToBottom();
-  }
-
   componentDidUpdate() {
     this.scrollToBottom();
   }
 
   render() {
     return (
-      <div className="overflow-auto" style={{ height: "500px"}}>
+      <div className="overflow-auto" style={{ height: "80vh"}}>
         <Transition
           items={this.props.texts} keys={item => item.key}
           //initial={null}
