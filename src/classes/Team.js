@@ -109,28 +109,28 @@ export default class Team {
     let texts = []
     if (camp === Team.CAMP.NORMAL && semaine === 1)
     {
-      texts.push({text: `Denis: C'est le début de l'aventure et l'heure des présentations chez les ${this.name}`, color: "gray", key: Statics.uniqueKey()})
-      texts.push({text:"Présentations", color: "green", key: Statics.uniqueKey()})
+      texts.push({text: `Denis: C'est le début de l'aventure et l'heure des présentations chez les ${this.name}`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
+      texts.push({text:"Présentations", color: Statics.COLORS.INFO, key: Statics.uniqueKey()})
       texts = texts.concat(this.presentations())
       return texts;
     }
     if (camp === Team.CAMP.VICTOIRE_CONFORT) {
-      texts.push({text: `Denis: De retour sur le camp après que la tribu ${this.name} ai pu profiter de sa récompense`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text: `Denis: De retour sur le camp après que la tribu ${this.name} ai pu profiter de sa récompense`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     }
     else if (camp === Team.CAMP.ECHEC_CONFORT) {
-      texts.push({text: `Denis: Allons maintenant voir du côté des ${this.name} qui reviennent perdant de la dernière épreuve de confort`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text: `Denis: Allons maintenant voir du côté des ${this.name} qui reviennent perdant de la dernière épreuve de confort`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     }
     else if (camp === Team.CAMP.VICTOIRE_IMMUNITE) {
-      texts.push({text: `Denis: La tribu ${this.name} a gagné l'épreuve d'immunité, voyons ce qu'il se passe sur leur camps !`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text: `Denis: La tribu ${this.name} a gagné l'épreuve d'immunité, voyons ce qu'il se passe sur leur camps !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     }
     else if (camp === Team.CAMP.ECHEC_IMMUNITE) {
-      texts.push({text: `Denis: Les ${this.name} reviennent sur le camps et vont devoir affronter le conseil allons faire un tour chez eux !`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text: `Denis: Les ${this.name} reviennent sur le camps et vont devoir affronter le conseil allons faire un tour chez eux !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     }
     texts = texts.concat(this.randomCampEvent())
     texts = texts.concat(this.randomCampEvent())
     if (camp === Team.CAMP.ECHEC_IMMUNITE) {
-      texts.push({text:"Conseil", color: "green", key: Statics.uniqueKey()})
-      texts.push({text: `Denis: C'est l'heure du conseil, les ${this.name} vont devoir décider de l'aventurier dont ils doivent se séparer !`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text:"Conseil", color: Statics.COLORS.INFO, key: Statics.uniqueKey()})
+      texts.push({text: `Denis: C'est l'heure du conseil, les ${this.name} vont devoir décider de l'aventurier dont ils doivent se séparer !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
       texts = texts.concat(this.conseil(false))
     }
     return texts;
@@ -151,14 +151,14 @@ export default class Team {
     }
     let depouille = Statics.countOccurrences(votesNames)
     for(let [key, val] of Object.entries(depouille)) {
-      texts.push({text: `Denis: ${val} votes contre vous ${key}`, color: "gray", key: Statics.uniqueKey()})
+      texts.push({text: `Denis: ${val} votes contre vous ${key}`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     }
 
     console.log("LES VOTEs", votes)
     let eliminatedCandidate = this.mostVoteCandidate(votes)
-    texts.push({text: `Denis: ${eliminatedCandidate.name} prenez votre flambeau, venez me rejoindre`, color: "gray", key: Statics.uniqueKey()})
+    texts.push({text: `Denis: ${eliminatedCandidate.name} prenez votre flambeau, venez me rejoindre`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     texts.push({text: `${eliminatedCandidate.name}: Peut être ai-je joué un jeu un peu trop ${eliminatedCandidate.type.typeName}`, color: this.color, key: Statics.uniqueKey()})
-    texts.push({text: `Denis: ${eliminatedCandidate.name} les aventuriers de la tribu ${this.name} ont décidé de vous éliminer, et leur sentence est irrévocable !!!`, color: "gray", key: Statics.uniqueKey()})
+    texts.push({text: `Denis: ${eliminatedCandidate.name} les aventuriers de la tribu ${this.name} ont décidé de vous éliminer, et leur sentence est irrévocable !!!`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     this.eliminate(eliminatedCandidate)
     return texts
   }
@@ -223,31 +223,31 @@ export default class Team {
         break;
       case EVENT.FOUND_WATER:
         texts.push({text: `${candidate.name}: J'ai trouvé l'eau !!!!!!`, color: this.color, key: Statics.uniqueKey()})
-        texts.push({text: `Denis: AH ! ${candidate.name} a trouvé l'eau chez les ${this.name} voilà qui va leur faire du bien !`, color: "gray", key: Statics.uniqueKey()})
+        texts.push({text: `Denis: AH ! ${candidate.name} a trouvé l'eau chez les ${this.name} voilà qui va leur faire du bien !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
         break;
       case EVENT.FOUND_ALCOHOL:
         texts.push({text: `${candidate.name}: J'ai trouvé l'eau !!!!!! Enfin j'ai trouvé des bières mais l'alcohol c'est de l'eau pas vrai !`, color: this.color, key: Statics.uniqueKey()})
         if (!this.singleTimeEvents.includes(EVENT.FOUND_WATER)) {
-          texts.push({text: `Denis: AH ! Visiblement ${candidate.name} est amnésique en plus d'être alcoolique car l'eau avait déjà été trouvé ...`, color: "gray", key: Statics.uniqueKey()})
+          texts.push({text: `Denis: AH ! Visiblement ${candidate.name} est amnésique en plus d'être alcoolique car l'eau avait déjà été trouvé ...`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
           texts.push({text: `${candidate.name}: Je vais enfin pouvoir arrêter de boire mon urine !`, color: this.color, key: Statics.uniqueKey()})
-          texts.push({text: `Denis: ... ah  ...`, color: "gray", key: Statics.uniqueKey()})
+          texts.push({text: `Denis: ... ah  ...`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
         }
         break;
       case EVENT.MADE_FIRE:
         texts.push({text: `${candidate.name}: J'ai fait le feu !!! Je savais que ça servirait d'être ${candidate.type.typeName}`, color: this.color, key: Statics.uniqueKey()})
-        texts.push({text: `Denis: ${candidate.name} a réussi a faire le feu, prouesse remarquable chez les ${this.name} voilà qui va réchauffer leur coeurs !`, color: "gray", key: Statics.uniqueKey()})
+        texts.push({text: `Denis: ${candidate.name} a réussi a faire le feu, prouesse remarquable chez les ${this.name} voilà qui va réchauffer leur coeurs !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
         this.rareSingleTimeEvents.push(EVENT.STOP_FIRE)
         this.lovedByEverybody(candidate)
         break;
       case EVENT.STOP_FIRE:
         texts.push({text: `${candidate.name}: POUR JOSEEEEEEEEPPHHHHHHHHHHHHHHHH !!!!!!!!`, color: this.color, key: Statics.uniqueKey()})
-        texts.push({text: `Denis: Impossible ! ${candidate.name} vient tout juste d'éteindre le précieux feu dans la tribu ${this.name} du presque jamais vu dans Koh-Lantah !`, color: "gray", key: Statics.uniqueKey()})
+        texts.push({text: `Denis: Impossible ! ${candidate.name} vient tout juste d'éteindre le précieux feu dans la tribu ${this.name} du presque jamais vu dans Koh-Lantah !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
         this.rareSingleTimeEvents.push(EVENT.MADE_FIRE)
         this.hatedByEverybody(candidate)
         break;
       case EVENT.COLLIER:
         texts.push({text: `${candidate.name}: shhhhhhshhshhshshhhh ... je viens de trouver un collier d'immunité ...!!  Ok je vais devoir le cacher avant de rentrer au camps`, color: this.color, key: Statics.uniqueKey()})
-        texts.push({text: `Denis: Grâce aux zooms de notre caméraman sur l'arbre ou il était caché, ${candidate.name}, qu'on qualifie souvent de ${candidate.type.typeName} a trouvé un collier !`, color: "gray", key: Statics.uniqueKey()})
+        texts.push({text: `Denis: Grâce aux zooms de notre caméraman sur l'arbre ou il était caché, ${candidate.name}, qu'on qualifie souvent de ${candidate.type.typeName} a trouvé un collier !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
         candidate.addItem("collier")
         break;
       case EVENT.DISPUTE:
@@ -297,7 +297,7 @@ export default class Team {
     while (tmpCandidates.length) {
       if (tmpCandidates.length === 1) {
         texts.push({text: Statics.replaceDialogueSolo(tmpCandidates[0], Statics.randomArray(Statics.PRESENTATION3[tmpCandidates[0].genre])), color: this.color, key: Statics.uniqueKey()})
-        texts.push({text: `Denis: Début d'aventure compliqué pour ${tmpCandidates[0].name} qui se fait bolosser par son équipe`, color: "gray", key: Statics.uniqueKey()})
+        texts.push({text: `Denis: Début d'aventure compliqué pour ${tmpCandidates[0].name} qui se fait bolosser par son équipe`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
         tmpCandidates=[]
       }
       else {
@@ -315,7 +315,7 @@ export default class Team {
         randomCandidate.addFriend(randomCandidate2)
         randomCandidate2.addFriend(randomCandidate)
 
-        texts.push({text:"Dialogue", color: "green", key: Statics.uniqueKey()})
+        texts.push({text:"Dialogue", color: Statics.COLORS.INFO, key: Statics.uniqueKey()})
       }
     }
     return texts;

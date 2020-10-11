@@ -78,7 +78,7 @@ export default class Statics {
       "NAME: Okok personne vient me parler à moi je retiens t'façon j'ai toujours su que c'était QU'UNE BANDE D...",
       "NAME: Bizarre, dans la vie je suis pourtant très appreciée de mon cactus de compagnie et là personne ne vient me parler",
       "NAME: Je suis une fille simple, on dit aussi de moi que je suis TYPE, mais sans amis c'est la première fois de ma vie ...",
-      "NAME: Je suis allée dire bonjour à tout le monde on m'a ignorée mais pas grave chacun fait sa vie y a pas de soucis, le jour ou je trouve l'eau je la garde pour moi, si je fais le feu il sera que pour moi et j'irais aux toilettes tout seul aussi pas de problèmes j'ai compris !!"
+      "NAME: Je suis allée dire bonjour à tout le monde on m'a ignorée mais pas grave chacun fait sa vie y a pas de soucis, le jour ou je trouve l'eau je la garde pour moi, si je fais le feu il sera que pour moi et j'irais aux toilettes toute seul aussi pas de problèmes j'ai compris !!"
     ],
   }
 
