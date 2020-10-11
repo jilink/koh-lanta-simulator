@@ -17,7 +17,7 @@ class GameComponent extends React.Component {
 		}
 		
         return (
-          <Container>
+          <Container className="mb-2">
 			<h1 className="text-white text-center text-stroke" style={{background: this.props.team.color}}>{this.props.team.name}</h1>
 			<ListGroup>
 			{candidates}

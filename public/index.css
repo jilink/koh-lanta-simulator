@@ -13,7 +13,7 @@ body {
 
 }
 
-h1, h2, h3 {
+h1, h2, h3, .navbar-brand, .alert-heading {
   font-family: 'SF Ironsides Extended';
 }
 

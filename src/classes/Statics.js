@@ -1,5 +1,10 @@
 import Candidate from './Candidate'
 export default class Statics {
+  static COLORS = {
+    INFO: "#88d8b0",
+    DENIS: "#2F9599",
+  }
+
   static EPREUVE = {
     PARCOURS_COMBATANT: {
       name: "parcours du combattant",

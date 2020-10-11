@@ -59,7 +59,9 @@ class GameComponent extends React.Component {
               </Col>
               <Col md={8}>
                 <TextGame texts={this.state.texts}/>
-                  <button onClick={this.next}>Next</button>
+			  <Button onClick={this.next} variant="primary">
+                Suivant
+			  </Button>
               </Col>
             </Row>
         );

@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Alert from 'react-bootstrap/Alert'
 
 import GameComponent from './GameComponent';
 import Candidate from '../classes/Candidate';
@@ -173,22 +174,32 @@ class FormComponent extends React.Component {
 		  <div>
 		  {this.state.step === 1 ?
 			<Form>
-			  <Form.Group controlId="numberCandidate">
-				<Form.Label>Nombre de candidats par équipe</Form.Label>
-				<Form.Control as="select" name="numberCandidates" onChange={this.handleChange}>
-				  <option value="5">5</option>
-				  <option value="6">6</option>
-				  <option value="7">7</option>
-				  <option value="8">8</option>
-				  <option value="9">9</option>
-				</Form.Control>
+			  <Alert variant="info">
+				  <Alert.Heading className="text-center">L'AVENTURE COMMENCE</Alert.Heading>
+				  <p>Bienvenue dans la version bêta de Koh-Lanta Simulator, n'hésitez pas à partager votre avis et votre expérience dans la partie contact</p>
+			</Alert>
+			  <Form.Group as={Row} controlId="numberCandidate">
+				<Form.Label column sm="4">Nombre de candidats par équipe</Form.Label>
+				 <Col sm="6">
+					 <Form.Control as="select" name="numberCandidates" onChange={this.handleChange}>
+					  <option value="5">5</option>
+					  <option value="6">6</option>
+					  <option value="7">7</option>
+					  <option value="8">8</option>
+					  <option value="9">9</option>
+					</Form.Control>
+				 </Col>
 			  </Form.Group>
 			  <Button onClick={this.handleStep} variant="primary">
-			  Next
+			  Suivant
 			  </Button>
 			</Form>
 			:
 			<Form>
+			  <Alert variant="info">
+				  <Alert.Heading className="text-center">INFORMATION</Alert.Heading>
+				  <p>Tous les noms laissés vides seront attribués aléatoirement (même le nom de équipes) vous n'avez aucune obligation de tout remplir pour lancer la simulation</p>
+			</Alert>
 				<Row className="align-items-center justify-content-center">
 					<Col className="mb-3">
 						<h1 className="text-white text-center text-stroke" style={{background: this.state.team1Color}}> TRIBU 1 </h1>
@@ -217,8 +228,8 @@ class FormComponent extends React.Component {
 					</Col>
 				</Row>
 				{team2Form}
-				<Button onClick={this.handleSubmit} variant="primary">
-					Submit
+				<Button onClick={this.handleSubmit} variant="success">
+					Lancer la simulation
 				</Button>
 			</Form>
 
