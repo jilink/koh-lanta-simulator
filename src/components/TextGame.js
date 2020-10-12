@@ -11,7 +11,8 @@ const defaultStyles = {
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: '20px',
-  border: '1px solid white',
+  border: '1px solid',
+  borderRadius: '16px',
   height: 'max-content',
   padding: 5,
 }
