@@ -1,5 +1,6 @@
 import React from 'react';
 import { SliderPicker } from 'react-color';
+import ReactGa from 'react-ga';
 
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
@@ -80,6 +81,10 @@ class FormComponent extends React.Component {
 	this.setState({team1Candidates: this.getCandidatesFromDic(this.state.teams.team1)})
 	this.setState({team2Candidates: this.getCandidatesFromDic(this.state.teams.team2)})
 	this.setState({filling: false})
+	ReactGa.event({
+		category:'Button',
+		action: 'Launched simulation'
+	})
   }
 
   getCandidatesFromDic(dic) {
@@ -120,6 +125,10 @@ class FormComponent extends React.Component {
 		}
 	  })
 	}
+	ReactGa.event({
+		category:'Button',
+		action: 'Started form'
+	})
   }
   
     render() {

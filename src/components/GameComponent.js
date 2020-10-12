@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGa from 'react-ga';
 import {isMobile} from 'react-device-detect';
 import Game from '../classes/Game';
 import Team from '../classes/Team';
@@ -35,6 +36,10 @@ class GameComponent extends React.Component {
     if (!this.state.team3)
       this.setState({ team3: this.game.team3})
     this.setState({ solo: this.game.getDisplaySolo()})
+	ReactGa.event({
+		category:'Button',
+		action: 'Next step simulation'
+	})
   }
 
     render() {

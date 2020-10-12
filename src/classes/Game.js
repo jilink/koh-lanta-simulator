@@ -1,3 +1,4 @@
+import ReactGa from 'react-ga';
 import Team from './Team'
 import Statics from './Statics'
 export default class Game {
@@ -183,6 +184,10 @@ export default class Game {
   getCurrentText() {
     if (!this.continue) {
       this.currentText = this.weekText.slice(this.weekText.length - Game.numberDisplay, this.weekText.length)
+      ReactGa.event({
+        category:'Button',
+        action: 'End of simulation'
+      })
       return this.currentText
     }
     if (this.currentText.length < Game.numberDisplay) {
