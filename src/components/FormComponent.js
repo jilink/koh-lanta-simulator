@@ -187,17 +187,17 @@ class FormComponent extends React.Component {
 				  <Alert.Heading className="text-center">L'AVENTURE COMMENCE</Alert.Heading>
 				  <p>Bienvenue dans la version bêta de Koh-Lanta Simulator, n'hésitez pas à partager votre avis et votre expérience dans la partie contact</p>
 			</Alert>
-			  <Form.Group as={Row} controlId="numberCandidate">
-				<Form.Label column sm="4">Nombre de candidats par équipe</Form.Label>
-				 <Col sm="6">
-					 <Form.Control as="select" name="numberCandidates" onChange={this.handleChange}>
-					  <option value="5">5</option>
-					  <option value="6">6</option>
-					  <option value="7">7</option>
-					  <option value="8">8</option>
-					  <option value="9">9</option>
-					</Form.Control>
-				 </Col>
+			  <Form.Group as={Row} controlId="numberCandidate" className="justify-content-md-center">
+				<Form.Label column sm="3">Nombre de candidats par équipe</Form.Label>
+					 <Col sm="2">
+						 <Form.Control as="select" name="numberCandidates" onChange={this.handleChange}>
+							 <option value="5">5</option>
+							 <option value="6">6</option>
+							 <option value="7">7</option>
+							 <option value="8">8</option>
+							 <option value="9">9</option>
+						 </Form.Control>
+					 </Col>
 			  </Form.Group>
 			  <Button onClick={this.handleStep} variant="primary">
 			  Suivant

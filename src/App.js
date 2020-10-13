@@ -4,14 +4,14 @@ import './App.css';
 import Home from './Home.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactGa from 'react-ga';
+import createHistory from 'history/createBrowserHistory'
 
 function App() {
-
-  useEffect(() => {
-    ReactGa.initialize('UA-180345460-1')
-    // to report page view
-    ReactGa.pageview('/')
-  }, [])
+  const history = createHistory()
+  ReactGa.initialize('UA-180345460-1')
+  history.listen((location, action) => {
+    ReactGa.pageview(location.pathname + location.search);
+  }); 
 
   return (
     <Home/>
