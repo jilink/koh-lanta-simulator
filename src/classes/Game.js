@@ -155,8 +155,11 @@ export default class Game {
 
   final(team) {
     let texts = []
-    texts.push({text: "Finale", color: Statics.COLORS.INFO, key: Statics.uniqueKey()})
-    texts.push({text: "AH! C'est l'heure de la grand finale !!", color: Statics.COLORS.INFO, key: Statics.uniqueKey()})
+    texts.push({text: "FINALE", color: Statics.COLORS.INFO, key: Statics.uniqueKey()})
+    texts.push({text: "AH! C'est l'heure de la grand finale !! Nos quatres derniers candidats sont :", color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
+    for (let candidate of team.candidates){
+      texts.push({text: `${candidate.name} !`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
+    }
     texts = texts.concat(this.orientation(team))
     texts = texts.concat(this.poteaux(team))
     this.continue = false
@@ -183,6 +186,7 @@ export default class Game {
 
   getCurrentText() {
     if (!this.continue) {
+      this.team3DisplayCandidates = this.team3.candidates.slice()
       this.currentText = this.weekText.slice(this.weekText.length - Game.numberDisplay, this.weekText.length)
       ReactGa.event({
         category:'Button',

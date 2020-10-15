@@ -13,6 +13,7 @@ export default class Candidate {
       vitesse: 0.8,
       natation: 0.6,
       survie: 0.7,
+      precision: 0.5,
     },
     GENTIL: {
       typeName: "gentil",
@@ -33,6 +34,7 @@ export default class Candidate {
       vitesse: 1.2,
       natation: 1.1,
       intelligence: 0.5,
+      precision: 0.8,
     },
     PARFAIT: {
       typeName: "parfait",
@@ -43,6 +45,7 @@ export default class Candidate {
       natation: 1.5,
       survie: 1.5,
       intelligence: 1.5,
+      precision: 1.5,
     },
     FUN: {
       typeName: "fun",
@@ -58,6 +61,7 @@ export default class Candidate {
       force: 1.8,
       vitesse: 1.8,
       natation: 1.6,
+      precision: 1.1,
     },
     STRATEGE: {
       typeName: "stratege",
@@ -69,6 +73,7 @@ export default class Candidate {
       natation: 0.7,
       survie: 0.8,
       intelligence: 2,
+      precision: 0.9,
     },
     DOYEN: {
       typeName: "doyen",
@@ -94,6 +99,7 @@ export default class Candidate {
       force: 0.9,
       vitesse: 1.2,
       natation: 1.1,
+      precision: 1.6,
     },
     MALCHANCEUX: {
       typeName: "malchanceux",
@@ -103,6 +109,7 @@ export default class Candidate {
       force: 1.1,
       vitesse: 1.3,
       survie: 1.1,
+      precision: 0.6,
     },
     BAVARD: {
       typeName: "bavard",
@@ -171,6 +178,7 @@ export default class Candidate {
       natation: 1.2,
       survie: 1.6,
       intelligence: 1.2,
+      precision: 1.2,
     },
     NAGEUR: {
       typeName: "nageur",

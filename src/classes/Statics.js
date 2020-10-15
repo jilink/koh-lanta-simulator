@@ -36,6 +36,16 @@ export default class Statics {
       type: "natation",
       fatigue: 6,
     },
+    BOUE: {
+      name: "boue",
+      type: "intelligence",
+      fatigue: 4,
+    },
+    TIR_ARC: {
+      name: "tir à l'arc",
+      type: "precision",
+      fatigue: 3,
+    },
   }
 
   static PRESENTATION1 = {
@@ -43,11 +53,17 @@ export default class Statics {
       "NAME1: Bonjour je me présente moi c'est NAME1, je cherche un allié dans l'aventure quelqu'un comme toi de TYPE2",
       "NAME1: Wesh, toi + moi = poto?",
       "NAME1: Excuse j'ai oublié ton nom c'est Amandine ou NAME2 ?",
+      "NAME1: Je vais être franc NAME2, toi et moi on va pas être potes, on va être les meilleurs potes !",
+      "NAME1: NAME2 SOIT MON AMI SOIT MON AMI STP !",
+      "NAME1: Yo je suis TYPE1, ça te dit qu'on devienne amis NAME2 ?",
     ],
     "F" : [
       "NAME1: Bonjour je me présente moi c'est NAME1, je cherche un allié dans l'aventure quelqu'un comme toi de TYPE2",
       "NAME1: Coucou, toi + moi = poto?",
       "NAME1: Excuse j'ai oublié ton nom c'est Amandine ou NAME2 ?",
+      "NAME1: Je vais être franche NAME2, toi et moi on va pas être potes, on va être les meilleurs potes !",
+      "NAME1: NAME2 SOIT MON AMI SOIT MON AMI STP !",
+      "NAME1: Yo je suis TYPE1, ça te dit qu'on devienne amis NAME2 ?",
     ]
   }
 
@@ -56,11 +72,15 @@ export default class Statics {
       "NAME2: Euh... salut NAME1 si tu veux qu'on fasse connaissance je te préviens directe je suis TYPE2",
       "NAME2: Tout ce que j'ai toujours voulu toute ma vie c'est qu'on soit amis NAME1 même si on s'est rencontré y a 5 minutes je sais ...",
       "NAME2: Toi t'es TYPE1 et moi je suis TYPE2 on ferait une bonne équipe en vrai NAME1",
+      "NAME2: Oh cool on arrête pas de me proposer des amitiés, d'abord Caroline en CM2 et maintenant toi NAME1 !",
+      "NAME2: NAME1 ok je veux bien qu'on soit potes mais j'aime pas trop ton côté TYPE1",
     ],
     "F" : [
       "NAME2: Euh... salut NAME1 si tu veux qu'on fasse connaissance je te préviens directe je suis TYPE2",
       "NAME2: Tout ce que j'ai toujours voulu toute ma vie c'est qu'on soit amis NAME1 même si on s'est rencontré y a 5 minutes je sais ...",
       "NAME2: Toi t'es TYPE1 et moi je suis TYPE2 on ferait une bonne équipe en vrai NAME1",
+      "NAME2: Oh cool on arrête pas de me proposer des amitiés, d'abord Benoît en CE1 et maintenant toi NAME1 !",
+      "NAME2: NAME1 ok je veux bien qu'on soit potes mais j'aime pas trop ton côté TYPE1",
     ],
   }
   
@@ -130,6 +150,13 @@ export default class Statics {
     ],
   
   }
+
+  static JOKES = [
+      "NAME: Alors c'est l'histoire d'un pingouin qui respire par les fesses, un jour il s'assoit et il meurt ! HAhahaAHaha m'éliminez pas svp je suis actif sur le camps.",
+      "NAME:  Pourquoi les pêcheurs ne sont pas gros ? Parce qu’ils surveillent leur ligne. Voilà c'était pour détendre un peu l'atmosphère vu qu'on arrive pas à pêcher.",
+      "NAME:  C'est l'histoire d'un papier qui tombe à l'eau. Il crie « Au secours ! J’ai pas pied ! ». Ceux qui rigolent pas j'ai noté leurs noms.",
+      "NAME:  Comment appelle-t-on un bébé éléphant prématuré ? Un éléphant tôt. Voilà j'ai fait cette blague à mon fils Tony il était mort de rire donc je voulais partager avec vous.",
+  ]
 
   static EVENT = {
     INJURED: "blessé",

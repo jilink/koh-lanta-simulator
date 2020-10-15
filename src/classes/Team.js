@@ -251,38 +251,40 @@ export default class Team {
         candidate.addItem("collier")
         break;
       case EVENT.DISPUTE:
-        texts.push({text: `${candidate.name}: je suis venerrr`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Vas y je sais pas pourquoi mais je suis enervé là`, color: this.color, key: Statics.uniqueKey()})
         break;
       case EVENT.AMITIE:
-        texts.push({text: `${candidate.name}: je suis content`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Je me sens de bonne humeur aujourd'hui`, color: this.color, key: Statics.uniqueKey()})
         break;
       case EVENT.DROLE:
-        texts.push({text: `${candidate.name}: je suis drole`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Les gars j'ai une blague !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: Statics.replaceDialogueSolo(candidate, Statics.randomArray(Statics.JOKES)), color: this.color, key: Statics.uniqueKey()})
         break;
       case EVENT.MANIOK:
-        texts.push({text: `${candidate.name}: j'ai trouvé le maniok mes amis, grâce à Jésus nous n'auront plus jamais faim !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: J'ai trouvé le maniok mes amis, grâce à Jésus nous n'auront plus jamais faim !`, color: this.color, key: Statics.uniqueKey()})
         this.updateFaims(-2)
         break;
       case EVENT.PECHE:
-        texts.push({text: `${candidate.name}: j'ai un poisson !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: LES GARS !! J'ai réussi j'ai un poisson ! Ce soir on va se faire un festin de ouf.`, color: this.color, key: Statics.uniqueKey()})
+        this.updateFaims(-5)
         break;
       case EVENT.PLUIE:
-        texts.push({text: `${candidate.name}: oh non ohlalala la pluie !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Attention il arrête pas de pleuvoir je sais pas si vous avez remarqué !`, color: this.color, key: Statics.uniqueKey()})
         break;
       case EVENT.CABANE:
-        texts.push({text: `${candidate.name}: et voilà j'ai fait la cabane yes !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Et voilà j'ai fait la cabane yes !`, color: this.color, key: Statics.uniqueKey()})
         this.rareSingleTimeEvents.push(EVENT.CABANE_DESTRUCTED)
         break;
       case EVENT.CABANE_DESTRUCTED:
-        texts.push({text: `${candidate.name}: et voilà j'ai détruit la cabane yes !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Et voilà j'ai détruit la cabane yes !`, color: this.color, key: Statics.uniqueKey()})
         this.singleTimeEvents.push(EVENT.CABANE)
         this.hatedByEverybody(candidate)
         break;
       case EVENT.COMPLOT:
-        texts.push({text: `${candidate.name}: go faire des alliances !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Ouais je vais tenter de monter un petit complot là faut commencer à faire des alliances !`, color: this.color, key: Statics.uniqueKey()})
         break;
       case EVENT.TRISTE:
-        texts.push({text: `${candidate.name}: jsuis triste !`, color: this.color, key: Statics.uniqueKey()})
+        texts.push({text: `${candidate.name}: Je suis triste ma famille me manque ça fait tellement longtemps que je les ai pas vu !`, color: this.color, key: Statics.uniqueKey()})
         break;
       default:
         break;
