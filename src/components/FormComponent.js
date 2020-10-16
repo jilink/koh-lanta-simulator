@@ -64,6 +64,7 @@ class FormComponent extends React.Component {
   handleChangeCandidate(team, candidate, event) {
 	this.setState({
 	  teams: {
+		...this.state.teams,
 		[`team${team}`]: {
 		  ...this.state.teams[`team${team}`],
 		  [`candidate${candidate}`]: {
@@ -154,7 +155,7 @@ class FormComponent extends React.Component {
 			</Row>
 			)
 		team2Form.push(
-			<Row key={i} onChange={(e) => this.handleChangeCandidate(1, i, e)}>
+			<Row key={i} onChange={(e) => this.handleChangeCandidate(2, i, e)}>
 			  <Col className="mb-3">
 				<Form.Control name={`name`} placeholder="Nom" maxLength="25"/>
 			  </Col>
