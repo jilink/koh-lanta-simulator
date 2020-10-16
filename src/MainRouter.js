@@ -18,7 +18,7 @@ function MainRouter() {
                     <Route exact path="/">
                         <FormComponent/>
                     </Route>
-                    <Route exact path="/contact">
+                    <Route path="/contact">
                         <Contact/>
                     </Route>
                 </Switch>
