@@ -1,4 +1,3 @@
-import Candidate from './Candidate'
 export default class Statics {
   static COLORS = {
     INFO: "#88d8b0",
@@ -215,7 +214,7 @@ export default class Statics {
   }
 
   static countOccurrences(array){
-    return array.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
+    return array.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1, prev)), {});
   }
   
   static diffArray(arr1, arr2) {

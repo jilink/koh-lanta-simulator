@@ -23,16 +23,16 @@ export default class Game {
   }
 
   presentation(){
-    console.log(`Bonjour et bienvenue dans cette nouvelle édition ${this.name} de Koh-Lanta qui oposera la tribu ${this.team1.name} à la tribu ${this.team2.name}`)
+    // console.log(`Bonjour et bienvenue dans cette nouvelle édition ${this.name} de Koh-Lanta qui oposera la tribu ${this.team1.name} à la tribu ${this.team2.name}`)
   }
 
   week() {
     let texts = []
     if (this.solo && (this.team3.candidates.length) < 5) {
       texts = texts.concat(this.final(this.team3))
-      for (let text of texts) {
+      // for (let text of texts) {
         // console.log(`%c ${text.text}`, `color: ${text.color}`);
-      }
+      // }
       return texts 
     }
 
@@ -55,9 +55,9 @@ export default class Game {
       texts.push({text: `Denis: AH ! L'heure de la réunification est venue ! Nos deux tribus n'en formeront qu'une seule, la tribu blanche !`, color: Statics.COLORS.DENIS})
       let team3Candidates = this.team1.candidates.concat(this.team2.candidates)
       this.team3 = new Team({name: "Réunifiés", candidates: team3Candidates, color: "#000000"})    }
-    for (let text of texts) {
+    // for (let text of texts) {
       // console.log(`%c ${text.text}`, `color: ${text.color}`);
-    }
+    // }
     return texts;
   }
 
@@ -102,7 +102,6 @@ export default class Game {
       texts.push({text: "Vie sur le camps", color: Statics.COLORS.INFO, key: Statics.uniqueKey()})
       texts = texts.concat(loserTeam.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
       this.eliminates.push(loserTeam.getLastEliminated())
-      console.log("le dernier eliminé est", this.eliminates.pop())
     
     }
 
@@ -146,7 +145,6 @@ export default class Game {
       texts = texts.concat(this.team3.events(this.semaine, Team.CAMP.ECHEC_IMMUNITE))
       winner.notImmune()
       this.eliminates.push(this.team3.getLastEliminated())
-      console.log("le dernier eliminé est", this.eliminates.pop())
     }
 
     return texts
@@ -208,7 +206,6 @@ export default class Game {
     }
     this.currentText = this.weekText.slice(this.currentTextIndex - Game.numberDisplay, this.currentTextIndex)
     this.currentTextIndex+=4
-    console.log(this.currentText)
     return this.currentText
   }
 

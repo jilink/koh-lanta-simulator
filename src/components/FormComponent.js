@@ -11,9 +11,7 @@ import Alert from 'react-bootstrap/Alert'
 
 import GameComponent from './GameComponent';
 import Candidate from '../classes/Candidate';
-import Team from '../classes/Team';
 
-// import { Container, Row, Col, Button } from 'react-bootstrap';
 
 class FormComponent extends React.Component {
     constructor(props){
@@ -45,7 +43,6 @@ class FormComponent extends React.Component {
 
   handleChange(event) {
 	this.setState({ [event.target.name]: event.target.value });
-	console.log(this.state)
   }
 
   handleChangeTeam1ColorDrag = (color) => {
@@ -94,11 +91,9 @@ class FormComponent extends React.Component {
 	  dicKeys = Object.keys(dic)
 	  for (let candidate of dicKeys) {
 		if (dic[candidate] && dic[candidate].name) {
-		  console.log(candidate, "ici")
 		  candidates.push(new Candidate(dic[candidate].name, Candidate.TYPE[dic[candidate].type], dic[candidate].genre))
 		}
 	  }
-	  console.log(candidates)
 	  if (candidates.length) {
 		return candidates
 	  }

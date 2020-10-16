@@ -6,12 +6,12 @@ import Team from '../classes/Team';
 import TextGame from './TextGame';
 import TeamComponent from './TeamComponent';
 
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 
 class GameComponent extends React.Component {
     constructor(props){
       super(props);
-      this.state = {texts : []}
+      this.state = {texts : [], disabledNext: false}
       this.next = this.next.bind(this);
   }
 
@@ -29,6 +29,8 @@ class GameComponent extends React.Component {
   }
   
   next() {
+    this.setState({disabledNext: true})
+    setTimeout(() => this.setState({disabledNext: false}) , 500);
     this.setState({ texts: this.game.getCurrentText()})
     this.setState({ candidatesTeam1: this.game.getTeam1DisplayCandidates()})
     this.setState({ candidatesTeam2: this.game.getTeam2DisplayCandidates()})
@@ -64,7 +66,7 @@ class GameComponent extends React.Component {
               </Col>
               <Col md={8}>
                 <TextGame texts={this.state.texts}/>
-			  <Button className="mt-1" onClick={this.next} variant="primary">
+			  <Button className="mt-1" onClick={this.next} disabled={this.state.disabledNext} variant="primary">
                 Suivant
 			  </Button>
               </Col>

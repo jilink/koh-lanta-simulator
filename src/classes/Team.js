@@ -30,7 +30,7 @@ export default class Team {
   }
 
   presentation(){
-    console.log(`Bonjour nous somme l'équipe ${this.name}, actuellement nous sommes ${this.number}`)
+    // console.log(`Bonjour nous somme l'équipe ${this.name}, actuellement nous sommes ${this.number}`)
   }
 
   getRandomCandidates(number, candidates=undefined){
@@ -100,7 +100,7 @@ export default class Team {
   }
   
   injured(index, candidate) {
-    console.log(`Denis: Bonjour tribu ${this.name}, j'ai une mauvaise nouvelle à vous annoncer,  ${this.candidates[index].name}, doit abandonner pour raisons médicales c'est donc le ou la dernière éliminé qui prend sa place, c'est à dire ${candidate.name}.`)
+    // console.log(`Denis: Bonjour tribu ${this.name}, j'ai une mauvaise nouvelle à vous annoncer,  ${this.candidates[index].name}, doit abandonner pour raisons médicales c'est donc le ou la dernière éliminé qui prend sa place, c'est à dire ${candidate.name}.`)
     this.candidates.splice(index, 1);
     this.candidates.push(candidate)
   }
@@ -154,7 +154,6 @@ export default class Team {
       texts.push({text: `Denis: ${val} votes contre vous ${key}`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     }
 
-    console.log("LES VOTEs", votes)
     let eliminatedCandidate = this.mostVoteCandidate(votes)
     texts.push({text: `Denis: ${eliminatedCandidate.name} prenez votre flambeau, venez me rejoindre`, color: Statics.COLORS.DENIS, key: Statics.uniqueKey()})
     texts.push({text: `${eliminatedCandidate.name}: Peut être ai-je joué un jeu un peu trop ${eliminatedCandidate.type.typeName}`, color: this.color, key: Statics.uniqueKey()})

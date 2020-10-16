@@ -190,7 +190,6 @@ export default class Candidate {
 
   constructor(name, type, genre) {
     this.name = name;
-	console.log(name)
     this.type = type || Candidate.TYPE.NORMAL;
     this.genre = genre || "H";
     this.faim = 0; // pourcentage de faim
@@ -202,7 +201,7 @@ export default class Candidate {
   }
 
   presentation() {
-    console.log(`Bonjour je suis ${this.name}, de type ${this.type.typeName} et je suis de genre ${this.genre}`)
+    // console.log(`Bonjour je suis ${this.name}, de type ${this.type.typeName} et je suis de genre ${this.genre}`)
   }
 
   getType() {

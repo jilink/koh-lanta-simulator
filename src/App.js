@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import Home from './Home.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactGa from 'react-ga';
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory as createHistory } from 'history'
 
 function App() {
   const history = createHistory()

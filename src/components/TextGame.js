@@ -1,8 +1,6 @@
 import React from 'react';
 import { Transition, animated } from 'react-spring/renderprops'
 
-import Game from '../classes/Game';
-
 const defaultStyles = {
   overflow: 'hidden',
   width: '100%',
@@ -18,10 +16,6 @@ const defaultStyles = {
 }
 
 export default class TextGame extends React.PureComponent {
-    constructor(props){
-      super(props);
-    }
-
   scrollToBottom = () => {
     setTimeout(() => this.messagesEnd.scrollIntoView({ behavior: "smooth" }), 150);
   }

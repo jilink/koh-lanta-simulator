@@ -3,14 +3,10 @@ import Container from 'react-bootstrap/Container'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 class GameComponent extends React.Component {
-    constructor(props){
-      super(props);
-  }
 
     render() {
 		const candidates = []
 		if (this.props.candidates) {
-			console.log("LES CANDIDATES", this.props.candidates)
 			for (let candidate of this.props.candidates) {
 				candidates.push(<ListGroup.Item key={`${candidate.name}+${candidate.type.typeName}`}>{candidate.name}</ListGroup.Item>)
 			}
