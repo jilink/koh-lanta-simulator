@@ -10,7 +10,7 @@ class Header extends React.Component {
                 <Navbar bg="dark" variant="dark" expand="md" className="mb-3">
                     <Link to="/"><Navbar.Brand className="logo">KOH-LANTA SIMULATOR</Navbar.Brand></Link>
                     <Nav className="mr-auto">
-                        <Nav.Link href="/koh-lanta-simulator/contact">Contact</Nav.Link>
+                        <Nav.Link><Link to="/contact" style={{ textDecoration: 'none', color: "hsla(0,0%,100%,.5)" }}>Contact</Link></Nav.Link>
                     </Nav>
                 </Navbar>
         );

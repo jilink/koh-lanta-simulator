@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
 } from "react-router-dom";
@@ -10,7 +10,7 @@ import Contact from './pages/Contact';
 
 function MainRouter() {
     return (
-        <Router basename="/koh-lanta-simulator">
+        <Router basename="/">
             <div>
                 <Header/>
 
