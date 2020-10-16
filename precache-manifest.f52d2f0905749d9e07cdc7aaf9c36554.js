@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cb7a64a4f4e70a09a6b16769eaa55b43",
+    "revision": "169ba53fb184719886ed50b994d16db8",
     "url": "/koh-lanta-simulator/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/koh-lanta-simulator/static/css/2.d9ad5f5c.chunk.css"
   },
   {
-    "revision": "8eefed05eb25974ebcf7",
+    "revision": "df4017380b01ac6eed27",
     "url": "/koh-lanta-simulator/static/css/main.aeaa6e53.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/koh-lanta-simulator/static/js/2.bfee488f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8eefed05eb25974ebcf7",
-    "url": "/koh-lanta-simulator/static/js/main.34f57195.chunk.js"
+    "revision": "df4017380b01ac6eed27",
+    "url": "/koh-lanta-simulator/static/js/main.bb5db4cf.chunk.js"
   },
   {
     "revision": "b9d85ad12d8e06873dc2",
