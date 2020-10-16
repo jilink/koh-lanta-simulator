@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    HashRouter as Router,
+    BrowserRouter as Router,
     Switch,
     Route,
 } from "react-router-dom";
@@ -10,7 +10,7 @@ import Contact from './pages/Contact';
 
 function MainRouter() {
     return (
-        <Router>
+        <Router basename="/koh-lanta-simulator">
             <div>
                 <Header/>
 
@@ -18,7 +18,7 @@ function MainRouter() {
                     <Route exact path="/">
                         <FormComponent/>
                     </Route>
-                    <Route path="/contact">
+                    <Route exact path="/contact">
                         <Contact/>
                     </Route>
                 </Switch>
