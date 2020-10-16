@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/koh-lanta-simulator/precache-manifest.f52d2f0905749d9e07cdc7aaf9c36554.js"
+  "/koh-lanta-simulator/precache-manifest.9ac172d41e5541b985a400a01ddcf09f.js"
 );
 
 self.addEventListener('message', (event) => {
