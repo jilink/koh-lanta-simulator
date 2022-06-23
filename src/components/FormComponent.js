@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Alert from 'react-bootstrap/Alert'
+import Image from 'react-bootstrap/Image'
 
 import GameComponent from './GameComponent';
 import Candidate from '../classes/Candidate';
@@ -175,76 +176,160 @@ class FormComponent extends React.Component {
 	  }
         return (
           <Container>
-		  {this.state.filling ?
-		  <div>
-		  {this.state.step === 1 ?
-			<Form>
-			  <Alert variant="info">
-				  <Alert.Heading className="text-center">L'AVENTURE COMMENCE</Alert.Heading>
-				  <p>Bienvenue dans la version bêta de Koh-Lanta Simulator, n'hésitez pas à partager votre avis et votre expérience dans la partie contact</p>
-			</Alert>
-			  <Form.Group as={Row} controlId="numberCandidate" className="justify-content-md-center">
-				<Form.Label column sm="3">Nombre de candidats par équipe</Form.Label>
-					 <Col sm="2">
-						 <Form.Control as="select" name="numberCandidates" onChange={this.handleChange}>
-							 <option value="5">5</option>
-							 <option value="6">6</option>
-							 <option value="7">7</option>
-							 <option value="8">8</option>
-							 <option value="9">9</option>
-						 </Form.Control>
-					 </Col>
-			  </Form.Group>
-			  <Button onClick={this.handleStep} variant="primary">
-			  Suivant
-			  </Button>
-			</Form>
-			:
-			<Form>
-			  <Alert variant="info">
-				  <Alert.Heading className="text-center">INFORMATION</Alert.Heading>
-				  <p>Tous les noms laissés vides seront attribués aléatoirement (même le nom de équipes) vous n'avez aucune obligation de tout remplir pour lancer la simulation</p>
-			</Alert>
-				<Row className="align-items-center justify-content-center">
-					<Col className="mb-3">
-						<h1 className="text-white text-center text-stroke" style={{background: this.state.team1Color}}> TRIBU 1 </h1>
-					</Col>
-				</Row>
-				<Row className="align-items-center justify-content-center">
-					<Col className="mb-3">
-						<Form.Control name={`team1Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
-					</Col>
-					<Col className="mb-3">
-						<SliderPicker color={ this.state.team1Color } onChange={ this.handleChangeTeam1ColorDrag }onChangeComplete={ this.handleChangeTeam1Color }/>
-					</Col>
-				</Row>
-				{team1Form}
-				<Row className="align-items-center justify-content-center">
-					<Col className="mb-3">
-						<h1 className="text-white text-center text-stroke" style={{background: this.state.team2Color}}> TRIBU 2 </h1>
-					</Col>
-				</Row>
-				<Row className="align-items-center justify-content-center">
-					<Col className="mb-3">
-						<Form.Control name={`team2Name`} placeholder="Nom de l'équipe" maxLength="25" onChange={this.handleChange}/>
-					</Col>
-					<Col className="mb-3">
-						<SliderPicker color={ this.state.team2Color } onChange={ this.handleChangeTeam2ColorDrag }onChangeComplete={ this.handleChangeTeam2Color }/>
-					</Col>
-				</Row>
-				{team2Form}
-				<Button onClick={this.handleSubmit} variant="success">
-					Lancer la simulation
-				</Button>
-			</Form>
-
-			  }
-		  </div>
-		  :
-		  <GameComponent numberCandidates={this.state.numberCandidates} team1Candidates={this.state.team1Candidates} team2Candidates={this.state.team2Candidates} team1Name={this.state.team1Name} team2Name={this.state.team2Name} team1Color={this.state.team1Color} team2Color={this.state.team2Color} />
-			  }
-		  </Container>
-		);
+            {this.state.filling ? (
+              <div>
+                {this.state.step === 1 ? (
+                  <Form>
+                    <Alert variant="info">
+                      <Alert.Heading className="text-center">
+                        L'AVENTURE COMMENCE
+                      </Alert.Heading>
+                      <p>
+                        Bienvenue dans la version bêta de Koh-Lanta Simulator,
+                        n'hésitez pas à partager votre avis et votre expérience
+                        dans la partie contact
+                      </p>
+                    </Alert>
+                    <Form.Group
+                      as={Row}
+                      controlId="numberCandidate"
+                      className="justify-content-md-center"
+                    >
+                      <Form.Label column sm="3">
+                        Nombre de candidats par équipe
+                      </Form.Label>
+                      <Col sm="2">
+                        <Form.Control
+                          as="select"
+                          name="numberCandidates"
+                          onChange={this.handleChange}
+                        >
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                        </Form.Control>
+                      </Col>
+                    </Form.Group>
+                    <Button
+                      className="m-3"
+                      onClick={this.handleStep}
+                      variant="primary"
+                    >
+                      Suivant
+                    </Button>
+                    <Col className="text-center" sm="12">
+                      <Alert variant="info">
+                        <Alert.Heading className="text-center">
+                          Je prépare un nouveau jeu !
+                        </Alert.Heading>
+                        <p>
+                          Merci de votre intérêt pour koh-lanta simulator qui
+                          est un très vieux projet tout moche mais que j'aime quand
+                          même. Aujourd'hui je prépare un autre jeu autour du
+                          même thème
+                        </p>
+                        <a rel="noopener noreferrer" target="_blank" href="https://cozy-surviving.cozy-codeur.fr">
+                          Cliquez ici pour en savoir plus sur Cozy Surviving
+                        </a>
+                      </Alert>
+                      <Image
+                        src="./cozy-surviving.gif"
+                        style={{ width: "50%" }}
+                      />
+                    </Col>
+                  </Form>
+                ) : (
+                  <Form>
+                    <Alert variant="info">
+                      <Alert.Heading className="text-center">
+                        INFORMATION
+                      </Alert.Heading>
+                      <p>
+                        Tous les noms laissés vides seront attribués
+                        aléatoirement (même le nom de équipes) vous n'avez
+                        aucune obligation de tout remplir pour lancer la
+                        simulation
+                      </p>
+                    </Alert>
+                    <Row className="align-items-center justify-content-center">
+                      <Col className="mb-3">
+                        <h1
+                          className="text-white text-center text-stroke"
+                          style={{ background: this.state.team1Color }}
+                        >
+                          {" "}
+                          TRIBU 1{" "}
+                        </h1>
+                      </Col>
+                    </Row>
+                    <Row className="align-items-center justify-content-center">
+                      <Col className="mb-3">
+                        <Form.Control
+                          name={`team1Name`}
+                          placeholder="Nom de l'équipe"
+                          maxLength="25"
+                          onChange={this.handleChange}
+                        />
+                      </Col>
+                      <Col className="mb-3">
+                        <SliderPicker
+                          color={this.state.team1Color}
+                          onChange={this.handleChangeTeam1ColorDrag}
+                          onChangeComplete={this.handleChangeTeam1Color}
+                        />
+                      </Col>
+                    </Row>
+                    {team1Form}
+                    <Row className="align-items-center justify-content-center">
+                      <Col className="mb-3">
+                        <h1
+                          className="text-white text-center text-stroke"
+                          style={{ background: this.state.team2Color }}
+                        >
+                          {" "}
+                          TRIBU 2{" "}
+                        </h1>
+                      </Col>
+                    </Row>
+                    <Row className="align-items-center justify-content-center">
+                      <Col className="mb-3">
+                        <Form.Control
+                          name={`team2Name`}
+                          placeholder="Nom de l'équipe"
+                          maxLength="25"
+                          onChange={this.handleChange}
+                        />
+                      </Col>
+                      <Col className="mb-3">
+                        <SliderPicker
+                          color={this.state.team2Color}
+                          onChange={this.handleChangeTeam2ColorDrag}
+                          onChangeComplete={this.handleChangeTeam2Color}
+                        />
+                      </Col>
+                    </Row>
+                    {team2Form}
+                    <Button onClick={this.handleSubmit} variant="success">
+                      Lancer la simulation
+                    </Button>
+                  </Form>
+                )}
+              </div>
+            ) : (
+              <GameComponent
+                numberCandidates={this.state.numberCandidates}
+                team1Candidates={this.state.team1Candidates}
+                team2Candidates={this.state.team2Candidates}
+                team1Name={this.state.team1Name}
+                team2Name={this.state.team2Name}
+                team1Color={this.state.team1Color}
+                team2Color={this.state.team2Color}
+              />
+            )}
+          </Container>
+        );
 	}
 }
 
